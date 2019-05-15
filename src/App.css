@@ -1,0 +1,14 @@
+
+.intro{
+    background: url(img/cover.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 1000px;
+    position: relative;
+}
+.intro-content{  
+    position: absolute;
+    bottom: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
