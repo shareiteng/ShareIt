@@ -4,7 +4,7 @@ import { Navbar,NavItem,Dropdown ,Divider} from 'react-materialize'
 
 const NavBar = ()=>{
     return(
-         <Navbar brand={<a />} alignLinks="right">
+         <Navbar fixed className="NavBar-tmp" brand={<a />} alignLinks="right">
                 <NavItem href="">
                 Getting started
                 </NavItem>

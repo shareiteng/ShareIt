@@ -3,12 +3,20 @@
     background: url(img/cover.jpg);
     background-size: cover;
     background-position: center;
-    min-height: 1000px;
-    position: relative;
+    min-height: 600px;
 }
 .intro-content{  
     position: absolute;
-    bottom: 0px;
-    margin-right: auto;
-    margin-left: auto;
+    bottom:30%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+.btn-intro{
+    border-radius: 3rem;
+    min-width: 20rem;
+    margin: 10px;
+}
+.NavBar-tmp{
+    background-color: rgba(83, 136, 14, 0.788)
 }
