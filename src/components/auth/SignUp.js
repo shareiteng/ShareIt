@@ -34,10 +34,7 @@ class SignUp extends Component{
                         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 </div>
                 <div>
-<<<<<<< HEAD
                     <Parallax image={<img src={cover1}/>} />
-=======
->>>>>>> 51c65def636b20a7d9dac5b8103e427600c789f8
                 </div>
                 <div id="join">
                     <div id="touch">
