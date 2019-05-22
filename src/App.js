@@ -1,23 +1,25 @@
 import React from 'react';
 import SignUp from './components/auth/SignUp'
-import NavBar from './components/layouts/NavBar'
 import Search from './components/shareItContent/search/Search'
-import Footer from './components/layouts/FooterCom'
 import './App.css'
-import { Map1 } from './components/shareItContent/search/Map1';
-/*
+import NavigationBar from './components/layouts/NavigationBar';
+import FooterCom from './components/layouts/FooterCom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-      */
 function App() {
   return (
-    <div className="App">
-    <NavBar></NavBar>
-    <SignUp></SignUp>
-    <Footer></Footer>
+    <BrowserRouter>
+            <div className="App">
+              <NavigationBar/>
+              <Switch>
+                <Route exact path='/' component={SignUp}/>
+                <Route path='/search' component={Search}/>
+              </Switch>
+              <FooterCom/>
+            </div>
+          </BrowserRouter>)
+          ;
 
-      
-    </div>
-  );
 }
 
 export default App;

@@ -1,22 +1,32 @@
 import React, { Component} from 'react'
-import { Collapsible,CollapsibleItem } from 'react-materialize'
+import  Accordion from 'react-bootstrap/Accordion'
+import  Card from 'react-bootstrap/Card'
 
 class SubscriptionContent extends Component{
     render(){
         return (
-            <div> 
-            <Collapsible>
-            <CollapsibleItem header="Better safe than sorry. That's my motto." icon="filter_drama">
-            Better safe than sorry. That's my motto.
-            </CollapsibleItem>
-            <CollapsibleItem header="Yeah, you do seem to have a little 'shit creek' ac…" icon="place">
-            Yeah, you do seem to have a little 'shit creek' action going.
-            </CollapsibleItem>
-            <CollapsibleItem header="You know, FYI, you can buy a paddle. Did you not p…" icon="whatshot">
-            You know, FYI, you can buy a paddle. Did you not plan for this contingency?
-            </CollapsibleItem>
-            </Collapsible>
-            </div>
+            <Accordion>
+                <Card>
+                    <Card.Header>
+                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                        Click me!
+                    </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="0">
+                    <Card.Body>Hello! I'm the body</Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+                <Card>
+                    <Card.Header>
+                    <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                        Click me!
+                    </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="1">
+                    <Card.Body>Hello! I'm another body</Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+                </Accordion>
 
             )
     }

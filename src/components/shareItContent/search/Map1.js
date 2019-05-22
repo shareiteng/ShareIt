@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 import SearchBar from './SearchBar'
-import {Button} from 'react-materialize'
-
-const mapStyles = {
-  width: '100%',
-  height: '100%'
-};
 
 
 export class Map1 extends Component {
@@ -42,14 +36,11 @@ export class Map1 extends Component {
 
     return  (
       
-      <div col l8 >
-          <Map google={google} initialCenter={userLocation} zoom={16} />
-          <div className= "" >
-          <div  className="">
-               <SearchBar/  >
-               </div>
-               </div>
-               <Button floating large className="red"  waves="light" waves="light"  icon="add" fab/>
+      <div >
+          <Map  className="mapStyles" google={google} initialCenter={userLocation} zoom={16} >
+               <SearchBar/  >  
+              </Map>
+               
         
       
       </div>

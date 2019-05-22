@@ -1,7 +1,8 @@
 import React, { Component} from 'react'
-import { Row,Col, } from 'react-materialize'
 import Map1 from './Map1'
-import  SubscriptionContent from '../../SubscriptionDetails/SubscriptionContent'
+import  SubscriptionDetails from '../../SubscriptionDetails/SubscriptionDetails'
+
+import { Row, Col, Container} from 'react-bootstrap'
 
 
 class Search extends Component{
@@ -9,18 +10,20 @@ class Search extends Component{
 
     render(){
         return (
-            <div>
+          <div className="timef">
+           <Container fluid={true} className= "ss" >
+          
+           <Row noGutters={true}>
+                <Col sm={8} md={8} >  <Map1 className="mapStyles"/>  </Col>
+                <Col > <SubscriptionDetails/>  </Col>
+            </Row>
             
-                <div>
-                <div className="col s12 m8 l8 ">
-                     <Map1/>
-                   
-                    <Col  l={4} push-l4>
-                    <SubscriptionContent/>
-                    </Col>
-                    </div>   
-            </div>
-        </div>
+           
+                </Container>
+       
+                </div>
+               
+       
         )
     }
 }
