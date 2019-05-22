@@ -1,10 +1,28 @@
 import React, { Component} from 'react'
-import {Navbar,Nav,NavDropdown} from 'react-bootstrap';
+import {Navbar,Nav,NavDropdown, Modal} from 'react-bootstrap';
 import cover1 from '../../img/cover1.jpg'
-
+import SignIn from '../auth/SignIn'
 
 
 class NavigationBar extends Component{
+    constructor(props, context) {
+        super(props, context);
+    
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.state = {
+      show: false,
+    };
+  }
+
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
+  }
 
     render(){
         return(
@@ -34,11 +52,21 @@ class NavigationBar extends Component{
                         <NavDropdown.Item href="#">Account</NavDropdown.Item>
                         <NavDropdown.Item href="#">My Profile</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#">LogIn</NavDropdown.Item>
+                        <NavDropdown.Item href="#" onClick={this.handleShow}>LogIn</NavDropdown.Item>
                     </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
+                <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Sign In</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+              <SignIn/>
+              </Modal.Body>
+         
+        </Modal>
             </Navbar>
+
         )
     }
 }

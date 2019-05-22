@@ -88,7 +88,7 @@ class SignUp extends Component{
                                 alt="Generic placeholder"
                             />
                             <Media.Body>
-                                <h5>For better World</h5>
+                                <h5>For a better World</h5>
                                 <p>
                                 Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
                                 ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
