@@ -50,7 +50,7 @@ class SubscriptionDetails extends Component{
                 </Card.Body>
                 </Accordion.Collapse>
             </Card>
-            <Button variant="secondary" size="lg" block>
+            <Button variant="secondary" size="lg" block href='/new_drive'>
                 Add New Drive
             </Button>
             </Accordion>

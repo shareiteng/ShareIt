@@ -5,15 +5,20 @@ import './App.css'
 import NavigationBar from './components/layouts/NavigationBar';
 import FooterCom from './components/layouts/FooterCom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import NewDrive from './components/shareItContent/newDrive/NewDrive'
+import Profile from './components/shareItContent/Profile';
+
 
 function App() {
   return (
     <BrowserRouter>
             <div className="App">
-              <NavigationBar/>
+              <NavigationBar/><br/><br/> <br/>
               <Switch>
                 <Route exact path='/' component={SignUp}/>
                 <Route path='/search' component={Search}/>
+                <Route path='/new_drive' component={NewDrive}/>
+                <Route path='/profile' component={Profile}/>
               </Switch>
               <FooterCom/>
             </div>

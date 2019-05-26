@@ -2,6 +2,7 @@ import React, { Component} from 'react'
 import {Navbar,Nav,NavDropdown, Modal} from 'react-bootstrap';
 import cover1 from '../../img/cover1.jpg'
 import SignIn from '../auth/SignIn'
+import avatar from '../../img/avatar.png'
 
 
 class NavigationBar extends Component{
@@ -28,13 +29,14 @@ class NavigationBar extends Component{
         return(
             
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/">
                 <img
                     alt=""
                     src={cover1}
                     width="20"
                     height="20"
                     className="d-inline-block align-top"
+                   
                 />
                 Transcane   
                 </Navbar.Brand>
@@ -45,12 +47,12 @@ class NavigationBar extends Component{
                     </Nav>
                    
                     <Nav.Link href="#"><i className="material-icons"> notifications  </i></Nav.Link>
-                    <img src={cover1} alt="Avatar" className="avatar" ></img>
+                    <img src={avatar} alt="Avatar" className="avatar" ></img>
                     <Nav>
                     
                     <NavDropdown  title="" id="collasible-nav-dropdown" alignRight >
                         <NavDropdown.Item href="#">Account</NavDropdown.Item>
-                        <NavDropdown.Item href="#">My Profile</NavDropdown.Item>
+                        <NavDropdown.Item href="profile">My Profile</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#" onClick={this.handleShow}>LogIn</NavDropdown.Item>
                     </NavDropdown>

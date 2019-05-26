@@ -7,11 +7,13 @@ import img4 from '../../img/img4.png'
 
 class SignUp extends Component{
 
-    state = {
-        userName: '',
-        email: '',
-        password:''
-      }
+        state = {
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+          }
+
       handleChange = (e) => {
         this.setState({
           [e.target.id]: e.target.value
