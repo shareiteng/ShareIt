@@ -9,6 +9,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path = "/index")
+@CrossOrigin
 public class MainController {
     @Autowired
     private UserInfoService userInfoService;
