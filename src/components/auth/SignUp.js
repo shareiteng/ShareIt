@@ -25,6 +25,11 @@ class SignUp extends Component{
         
         console.log(this.state);
       }
+      formInput = (input, text) => {
+        if(this.state[input]==="")
+          return (text);
+       return "";
+      }
 
     render() {
         return (
@@ -32,9 +37,9 @@ class SignUp extends Component{
             <div id="SignUp">
 
                 <div className="intro" >
-                    <div className="intro-content">
-                        <Button size="lg" className="grey darken-3 btn-intro" href="#info" node='a'>More Info</Button>
-                        <Button size="lg" className="grey darken-3 btn-intro" href="#join" node='a'>Join Us</Button>
+                    <div className="  intro-content">
+                        <Button size="lg" className="  transparent btn-intro" href="#info" node='a'>More Info</Button>
+                        <Button size="lg" className="transparent darken-3 btn-intro" href="#join" node='a'>Join Us</Button>
                     </div> 
                     
                 </div>
@@ -112,19 +117,19 @@ class SignUp extends Component{
                   <Col>
                          <form className="form" onSubmit={this.handleSubmit}>
                             <div className="input-field">
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">{this.formInput("email", "E-Mail")}</label>
                                 <input type="email" id='email' onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="password">Password</label>
+                                <label htmlFor="password">{this.formInput("password", "Password")}</label>
                                 <input type="password" id='password' onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="firstName">First Name</label>
+                                <label htmlFor="firstName">{this.formInput("firstName"," First Name")}</label>
                                 <input type="text" id='firstName' onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="lastName">Last Name</label>
+                                <label htmlFor="lastName">{this.formInput("lastName","Last Name")}</label>
                                 <input type="text" id='lastName' onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
