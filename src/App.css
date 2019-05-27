@@ -15,13 +15,8 @@
 }
 .btn-intro{
     border-radius: 3rem;
-    min-width: 23rem;
+    min-width: 20rem;
     margin: 3rem;
-    min-height: 3.5rem;
-     box-shadow: 5px 5px 10px gray;
-     border-style: inset;
- 
-     
 }
 .NavBar-tmp{
     background-color: rgba(40, 133, 16, 0.788);
