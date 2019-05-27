@@ -6,31 +6,38 @@ import img4 from '../../img/img4.png'
 import * as TranScanApi from '../../TranscanApi'
 
 class SignUp extends Component{
+    constructor(){
+        super()
 
-        state = {
+        this.state = {
             email: '',
             password: '',
             username: ''
-          }
-
-      handleChange = (e) => {
+            }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleChange = (e) => {
         this.setState({
-          [e.target.id]: e.target.value
+        [e.target.id]: e.target.value
         })
         console.log(this.state);
-      }
-      handleSubmit = (e) => {
+    }
+    handleSubmit = (e) => {
         e.preventDefault()
-        let myForm = document.getElementById('myForm');
-        var formData = new FormData(myForm);
+        const newUser ={
+            email:this.state.email,
+            password: this.state.password,
+            username: this.state.username
+        }
 
-        if(TranScanApi.add(formData).then(res => res.json())) window.location.href ="/search";
-      }
-      formInput = (input, text) => {
-        if(this.state[input]==="")
-          return (text);
-       return "";
-      }
+        if(TranScanApi.add(newUser).then(res => res.json())) window.location.href ="/search";
+    }
+    formInput = (input, text) => {
+    if(this.state[input]==="")
+        return (text);
+    return "";
+    }
 
     render() {
         return (
@@ -116,7 +123,7 @@ class SignUp extends Component{
                         <h1> Sign Up </h1> 
                     </Col>
                   <Col>
-                         <form className="form" id='myForm'>
+                         <form className="form" id='myForm' onSubmit={this.handleSubmit}>
                             <div className="input-field">
                                 <label htmlFor="username">{this.formInput("username","User Name")}</label>
                                 <input name="username" type="text" id="username" onChange={this.handleChange} />
@@ -130,7 +137,7 @@ class SignUp extends Component{
                                 <input name="password" type="password" id="password" onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <button className="btn signBtn " onClick={this.handleSubmit}>Sign Up</button>
+                                <button className="btn signBtn ">Sign Up</button>
                             
                     </div>
                     </form>

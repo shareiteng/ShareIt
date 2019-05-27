@@ -13,4 +13,4 @@ export const add = (query) =>
   fetch(`${api}/add`, {
     method: 'POST',
     body:query 
-  }) // parses JSON response into native Javascript objects 
+  }) 
