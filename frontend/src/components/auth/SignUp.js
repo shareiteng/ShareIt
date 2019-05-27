@@ -10,9 +10,9 @@ class SignUp extends Component{
         super()
 
         this.state = {
-            email: '',
-            password: '',
-            username: ''
+            email: "",
+            password: "",
+            username: ""
             }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,7 +31,7 @@ class SignUp extends Component{
             username: this.state.username
         }
 
-        if(TranScanApi.add(newUser).then(res => res.json())) window.location.href ="/search";
+        if(TranScanApi.add(newUser)) window.location.href ="/search";
     }
     formInput = (input, text) => {
     if(this.state[input]==="")

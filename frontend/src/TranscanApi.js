@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const api = "http://localhost:8080/index"
 
 // Generate a unique token for storing your bookshelf data on the backend server.
@@ -10,7 +12,5 @@ const headers = {
   'Authorization': token
 }
 export const add = (query) =>
-  fetch(`${api}/add`, {
-    method: 'POST',
-    body:query 
-  }) 
+  axios.post(`${api}/addNewUser`, query);
+  
