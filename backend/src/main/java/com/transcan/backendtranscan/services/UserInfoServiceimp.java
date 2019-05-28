@@ -24,7 +24,7 @@ public abstract class UserInfoServiceimp implements UserInfoService{
 
             // start a transaction
             session.beginTransaction();
-             theStudents = session.createQuery("from user_info u where u.username="+username+"").getResultList();
+             theStudents = session.createQuery("from user_info u where u.email="+username+"").getResultList();
 
 
 

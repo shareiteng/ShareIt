@@ -1,10 +1,11 @@
 import React, { Component} from 'react'
-import{connect }from 'react-redux'
+
+import * as TranScanApi from '../../TranscanApi'
 
 
 
 class SignIn extends Component{
-
+  
     state = {
         email: '',
         password:''
@@ -15,11 +16,29 @@ class SignIn extends Component{
         })
         console.log(this.state);
       }
-      handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.signIn(this.state)
-        console.log(this.state);
+      hnadleLogin=(user)=> {
+        return TranScanApi.login(user).then(response => {
+
+          return response.data
+        })
       }
+        handleSubmit = (e) => {
+        e.preventDefault();
+        //this.props.signIn(this.state)
+        //console.log(this.state);
+        const user = {
+          email: this.state.email,
+          password: this.state.password
+        }
+       let a=this.hnadleLogin(user).then(response => {
+        (response)? window.location.href ="/search":console.log("somethimg wrong");
+         
+
+      })
+      console.log( a);
+      
+    }
+
        formInput = (input) => {
         if(this.state[input]==="")
           return (input);

@@ -42,12 +42,14 @@ public class MainController {
         return new ResponseEntity<UserInfo>(newUser,HttpStatus.CREATED);
     }
     //need to handle exception
-    @RequestMapping(path = "/get")
-    public @ResponseBody boolean get(@RequestParam String username,@RequestParam String password){
+    @RequestMapping(path = "/login")
+    public @ResponseBody boolean get(@RequestParam String email,@RequestParam String password){
+        Iterable<UserInfo> n = userInfoService.findAll();
 
-        List<UserInfo> n = userInfoService.findByUsername(username);
-        for (UserInfo c:n) {
-            if(password.equals(c.getPassword()))return true;
+        for (UserInfo c :n) {
+
+            if(password.equals(c.getPassword())&& email.equals((c.getEmail())))
+                return true;
         }
         return false;
 
