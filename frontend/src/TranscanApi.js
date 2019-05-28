@@ -8,7 +8,7 @@ if (!token)
   token = localStorage.token = Math.random().toString(36).substr(-8)
 
 
-export const add = (query) =>
+export const addNewUser = (query) =>
   axios.post(`${api}/addNewUser`, query);
 
 export  const login = (query) =>

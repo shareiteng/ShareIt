@@ -37,7 +37,7 @@ class SignUp extends Component{
             score:0
         }
 
-        if(TranScanApi.add(newUser)) window.location.href ="/search";
+        if(TranScanApi.addNewUser(newUser)) window.location.href ="/search";
     }
     formInput = (input, text) => {
     if(this.state[input]==="")
