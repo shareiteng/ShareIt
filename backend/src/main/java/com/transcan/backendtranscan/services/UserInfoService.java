@@ -6,6 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface UserInfoService extends CrudRepository<UserInfo,Integer> {
-    List<UserInfo> findByUsername(String username);
 }
 

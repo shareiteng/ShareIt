@@ -14,9 +14,16 @@ public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @NotBlank (message = "Username cannot be blank")
-    private String username;
+    @NotBlank (message = "E-mail cannot be blank")
     private String email;
+    @NotBlank (message = "Password cannot be blank")
     private String password;
+    private String firstname;
+    private String lastname;
+    private String address;
+    private String phone;
+    private Boolean vehicle;
+    private long score;
+
 
 }

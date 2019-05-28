@@ -12,7 +12,8 @@ class SignUp extends Component{
         this.state = {
             email: "",
             password: "",
-            username: ""
+            firstname: "",
+            lastname:""
             }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,7 +29,12 @@ class SignUp extends Component{
         const newUser ={
             email:this.state.email,
             password: this.state.password,
-            username: this.state.username
+            firstname: this.state.firstname,
+            lastname:this.state.lastname,
+            address:null,
+            phone:null,
+            vehicle:false,
+            score:0
         }
 
         if(TranScanApi.add(newUser)) window.location.href ="/search";
@@ -125,8 +131,12 @@ class SignUp extends Component{
                   <Col>
                          <form className="form" id='myForm' onSubmit={this.handleSubmit}>
                             <div className="input-field">
-                                <label htmlFor="username">{this.formInput("username","User Name")}</label>
-                                <input name="username" type="text" id="username" onChange={this.handleChange} />
+                                <label htmlFor="firstname">{this.formInput("firstname","First Name")}</label>
+                                <input name="firstname" type="text" id="firstname" onChange={this.handleChange} />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="lastname">{this.formInput("lastname","Last Name")}</label>
+                                <input name="lastname" type="text" id="lastname" onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
                                 <label htmlFor="email">{this.formInput("email", "E-Mail")}</label>
