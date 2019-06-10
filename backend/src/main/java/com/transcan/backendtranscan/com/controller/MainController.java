@@ -1,8 +1,6 @@
 package com.transcan.backendtranscan.com.controller;
 
-import com.transcan.backendtranscan.domain.SearchRide;
 import com.transcan.backendtranscan.domain.UserInfo;
-import com.transcan.backendtranscan.services.SearchRideService;
 import com.transcan.backendtranscan.services.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.BindResult;
@@ -24,42 +22,28 @@ import java.util.Map;
 public class MainController {
     @Autowired
     private UserInfoService userInfoService;
-    @Autowired
-    private SearchRideService searchRideService;
-
-    private ResponseEntity<Map<String, String>> getErrorMap(BindingResult result){
-
-        Map<String, String> errorMap = new HashMap<>();
-
-
-
-        for(FieldError error: result.getFieldErrors()){
-            errorMap.put(error.getField(), error.getDefaultMessage());
-        }
-
-        return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
-    }
-
 
     @PostMapping(path = "/addNewUser")
-    public ResponseEntity<?> addNewUser (@Valid @RequestBody UserInfo userInfo, BindingResult result) {
+    public ResponseEntity<?> addNewUser (@Valid @RequestBody UserInfo userInfo, BindingResult result) throws SecurityException {
 
-        if(result.hasErrors()) return getErrorMap(result);
+        if(result.hasErrors()){
+            Map<String, String> errorMap = new HashMap<>();
+            for(FieldError error: result.getFieldErrors()){
+                errorMap.put(error.getField(), error.getDefaultMessage());
+            }
 
-
-        UserInfo newUser=userInfoService.save(userInfo);
-        return new ResponseEntity<UserInfo>(newUser,HttpStatus.CREATED);
-    }
-    @PostMapping(path = "/addSearchDrive")
-    public ResponseEntity<?> addSearchDrive (@Valid @RequestBody SearchRide searchRide, BindingResult result) {
-
-        if(result.hasErrors()) return getErrorMap(result);
-
-        SearchRide newRide=searchRideService.save(searchRide);
-        return new ResponseEntity<SearchRide>(newRide,HttpStatus.CREATED);
-    }
-
-
+            return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
+        }
+             Iterable<UserInfo> n = userInfoService.findAll();
+       // Sec-exception- the email already exist
+        SecurityException exception= new SecurityException();
+        for (UserInfo u: n){
+            if (userInfo.getEmail().equals(u.getEmail()))
+               throw exception;
+        }
+                UserInfo newUser=userInfoService.save(userInfo);
+                return new ResponseEntity<UserInfo>(newUser,HttpStatus.CREATED);
+            }
     //need to handle exception
     @RequestMapping(path = "/login")
     public @ResponseBody boolean get(@RequestParam String email,@RequestParam String password){

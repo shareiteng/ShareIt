@@ -3,7 +3,9 @@ import {Button,Row,Col, Container, Media} from 'react-bootstrap';
 import img1 from '../../img/img1.png'
 import img3 from '../../img/img3.jpg'
 import img4 from '../../img/img4.png'
-import * as TranScanApi from '../../TranscanApi'
+import {signUp} from '../../store/actions/AuthActions'
+import{connect }from 'react-redux'
+
 
 class SignUp extends Component{
     constructor(){
@@ -12,8 +14,7 @@ class SignUp extends Component{
         this.state = {
             email: "",
             password: "",
-            firstname: "",
-            lastname:""
+            username: ""
             }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,18 +27,11 @@ class SignUp extends Component{
     }
     handleSubmit = (e) => {
         e.preventDefault()
-        const newUser ={
-            email:this.state.email,
-            password: this.state.password,
-            firstname: this.state.firstname,
-            lastname:this.state.lastname,
-            address:null,
-            phone:null,
-            vehicle:false,
-            score:0
-        }
+        this.props.signUp(this.state);
+   
 
-        if(TranScanApi.add(newUser)) window.location.href ="/search";
+
+      
     }
     formInput = (input, text) => {
     if(this.state[input]==="")
@@ -131,12 +125,8 @@ class SignUp extends Component{
                   <Col>
                          <form className="form" id='myForm' onSubmit={this.handleSubmit}>
                             <div className="input-field">
-                                <label htmlFor="firstname">{this.formInput("firstname","First Name")}</label>
-                                <input name="firstname" type="text" id="firstname" onChange={this.handleChange} />
-                            </div>
-                            <div className="input-field">
-                                <label htmlFor="lastname">{this.formInput("lastname","Last Name")}</label>
-                                <input name="lastname" type="text" id="lastname" onChange={this.handleChange} />
+                                <label htmlFor="username">{this.formInput("username","User Name")}</label>
+                                <input name="username" type="text" id="username" onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
                                 <label htmlFor="email">{this.formInput("email", "E-Mail")}</label>
@@ -161,4 +151,17 @@ class SignUp extends Component{
         )
     }
 }
-export default SignUp
+const mapStateToProps = (state) => {
+    return {
+      auth: state.auth,
+     // authError: state.auth.authError
+    }
+  }
+  
+  const mapDispatchToProps = (dispatch)=> {
+    return {
+      signUp: (creds) => dispatch(signUp(creds))
+    }
+  }
+  
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp)
