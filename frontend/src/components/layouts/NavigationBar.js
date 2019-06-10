@@ -1,33 +1,17 @@
-import React, { Component} from 'react'
-import {Navbar,Nav,NavDropdown, Modal} from 'react-bootstrap';
+import React from 'react'
+import {Navbar,Nav} from 'react-bootstrap';
 import cover1 from '../../img/cover1.jpg'
-import SignIn from '../auth/SignIn'
-import avatar from '../../img/avatar.png'
+import LogOutLinks from './LogOutLinks'
+import LogInLinks from './LogInLinks'
+import{connect }from 'react-redux'
 
 
-class NavigationBar extends Component{
-    constructor(props, context) {
-        super(props, context);
-    
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
 
-    this.state = {
-      show: false,
-    };
-  }
-
-  handleClose() {
-    this.setState({ show: false });
-  }
-
-  handleShow() {
-    this.setState({ show: true });
-  }
-
-    render(){
+const  NavigationBar=(props)=>{
+        const {auth}=props;
+        const links= auth ?<LogInLinks />: <LogOutLinks />
         return(
-            
+          
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
             <Navbar.Brand href="/">
                 <img
@@ -46,31 +30,18 @@ class NavigationBar extends Component{
                     <Nav className="mr-auto">
                     </Nav>
                    
-                    <Nav.Link href="#"><i className="material-icons"> notifications  </i></Nav.Link>
-                    <img src={avatar} alt="Avatar" className="avatar" ></img>
-                    <Nav>
-                    
-                    <NavDropdown  title="" id="collasible-nav-dropdown" alignRight >
-                        <NavDropdown.Item href="#">Account</NavDropdown.Item>
-                        <NavDropdown.Item href="profile">My Profile</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#" onClick={this.handleShow}>LogIn</NavDropdown.Item>
-                    </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-                <Modal show={this.state.show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Sign In</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-              <SignIn/>
-              </Modal.Body>
-         
-        </Modal>
+                    {links}   
+                 </Navbar.Collapse>
             </Navbar>
 
         )
-    }
+    
 }
-export default NavigationBar
+const mapStateToProps=(state) => {
+  return{
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps )(NavigationBar)
  

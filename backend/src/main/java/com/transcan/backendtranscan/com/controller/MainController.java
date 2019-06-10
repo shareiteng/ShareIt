@@ -24,23 +24,26 @@ public class MainController {
     private UserInfoService userInfoService;
 
     @PostMapping(path = "/addNewUser")
-    public ResponseEntity<?> addNewUser (@Valid @RequestBody UserInfo userInfo, BindingResult result) {
+    public ResponseEntity<?> addNewUser (@Valid @RequestBody UserInfo userInfo, BindingResult result) throws SecurityException {
 
         if(result.hasErrors()){
             Map<String, String> errorMap = new HashMap<>();
-
-
-
             for(FieldError error: result.getFieldErrors()){
                 errorMap.put(error.getField(), error.getDefaultMessage());
             }
 
             return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
         }
-
-        UserInfo newUser=userInfoService.save(userInfo);
-        return new ResponseEntity<UserInfo>(newUser,HttpStatus.CREATED);
-    }
+             Iterable<UserInfo> n = userInfoService.findAll();
+       // Sec-exception- the email already exist
+        SecurityException exception= new SecurityException();
+        for (UserInfo u: n){
+            if (userInfo.getEmail().equals(u.getEmail()))
+               throw exception;
+        }
+                UserInfo newUser=userInfoService.save(userInfo);
+                return new ResponseEntity<UserInfo>(newUser,HttpStatus.CREATED);
+            }
     //need to handle exception
     @RequestMapping(path = "/login")
     public @ResponseBody boolean get(@RequestParam String email,@RequestParam String password){

@@ -3,7 +3,9 @@ import {Button,Row,Col, Container, Media} from 'react-bootstrap';
 import img1 from '../../img/img1.png'
 import img3 from '../../img/img3.jpg'
 import img4 from '../../img/img4.png'
-import * as TranScanApi from '../../TranscanApi'
+import {signUp} from '../../store/actions/AuthActions'
+import{connect }from 'react-redux'
+
 
 class SignUp extends Component{
     constructor(){
@@ -25,13 +27,11 @@ class SignUp extends Component{
     }
     handleSubmit = (e) => {
         e.preventDefault()
-        const newUser ={
-            email:this.state.email,
-            password: this.state.password,
-            username: this.state.username
-        }
+        this.props.signUp(this.state);
+   
 
-        if(TranScanApi.add(newUser)) window.location.href ="/search";
+
+      
     }
     formInput = (input, text) => {
     if(this.state[input]==="")
@@ -151,4 +151,17 @@ class SignUp extends Component{
         )
     }
 }
-export default SignUp
+const mapStateToProps = (state) => {
+    return {
+      auth: state.auth,
+     // authError: state.auth.authError
+    }
+  }
+  
+  const mapDispatchToProps = (dispatch)=> {
+    return {
+      signUp: (creds) => dispatch(signUp(creds))
+    }
+  }
+  
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp)
