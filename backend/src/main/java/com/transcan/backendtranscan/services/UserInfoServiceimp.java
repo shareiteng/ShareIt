@@ -1,4 +1,4 @@
-package com.transcan.backendtranscan.services;
+/*package com.transcan.backendtranscan.services;
 
 import com.transcan.backendtranscan.domain.UserInfo;
 import org.hibernate.Session;
@@ -35,3 +35,4 @@ public abstract class UserInfoServiceimp implements UserInfoService{
         return theStudents;
     }
 }
+*/
