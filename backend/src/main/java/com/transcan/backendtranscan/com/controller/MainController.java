@@ -48,15 +48,12 @@ public class MainController {
     @RequestMapping(path = "/login")
     public @ResponseBody boolean get(@RequestParam String email,@RequestParam String password){
         Iterable<UserInfo> n = userInfoService.findAll();
-
         for (UserInfo c :n) {
-
             if(password.equals(c.getPassword())&& email.equals((c.getEmail())))
+
                 return true;
         }
         return false;
-
-
     }
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<UserInfo> getAllUsers(){

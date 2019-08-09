@@ -17,7 +17,7 @@ public abstract class UserInfoServiceimp implements UserInfoService{
                 .addAnnotatedClass(UserInfo.class)
                 .buildSessionFactory();
 
-        // create session
+        //create session
         Session session = factory.getCurrentSession();
 
         try {

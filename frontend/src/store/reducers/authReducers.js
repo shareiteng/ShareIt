@@ -40,7 +40,7 @@ const initState = {
         }
 
   case 'SIGNUP_ERROR':
-    console.log('signup error')
+    console.log('signup error');
     return {
       ...state,
       authError: action.err.message
