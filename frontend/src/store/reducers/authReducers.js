@@ -31,7 +31,7 @@ const initState = {
           }
          
         case 'SIGNUP_SUCCESS':
-            window.location.href="/search" 
+            //window.location.href="/search" 
             console.log('signup success')
          return {
         ...state,

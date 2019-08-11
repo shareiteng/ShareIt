@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = "http://localhost:8080/index"
+const api = "http://localhost:5000/api/auth"
 
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token
@@ -9,10 +9,7 @@ if (!token)
 
 
 export const addNewUser = (query) =>
-  axios.post(`${api}/addNewUser`, query);
+  axios.post(`${api}/signup`, query);
 
 export  const login = (query) =>
-  axios.get(`${api}/login`,{
-    params: 
-      query
-    })
+  axios.post(`${api}/signin`,query)
