@@ -9,6 +9,12 @@ go to SQL command line and perfom this line:
         password: TranScan!23456
 
     dataBase: https://remotemysql.com
-        same email and password to connect
+        same em5sesse55sessseess555aail and password to connect
         database name kIvtSq14rj
         password :20bXb8L4Ab
+
+
+
+
+netstat -ano | findstr 5000
+taskkill /F /pid (replace with id fom cmd)
