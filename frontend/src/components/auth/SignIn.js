@@ -8,7 +8,7 @@ import {signIn} from '../../store/actions/AuthActions'
 class SignIn extends Component{
   
     state = {
-        email: '',
+        usernameOrEmail: '',
         password:''
       }
       handleChange = (e) => {
@@ -37,8 +37,8 @@ class SignIn extends Component{
 
 <form className="form" onSubmit={this.handleSubmit}>
                             <div className="input-field">
-                                <label htmlFor="email">{this.formInput('email')}</label>
-                                <input type="email" id='email' onChange={this.handleChange} />
+                                <label htmlFor="usernameOrEmail">{this.formInput('usernameOrEmail')}</label>
+                                <input type="usernameOrEmail" id='usernameOrEmail' onChange={this.handleChange} />
                             </div>
                             
                             <div className="input-field">

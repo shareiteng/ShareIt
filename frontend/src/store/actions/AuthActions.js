@@ -6,6 +6,7 @@ export const signIn = (user) => {
      
            
       login(user).then(response => {
+        console.log(response.data);
         if(response.data)
         dispatch({ type: 'LOGIN_SUCCESS' });
         else
@@ -17,6 +18,7 @@ export const signIn = (user) => {
 export const signUp = (newUser) => {
   return (dispatch) => {
     addNewUser(newUser).then(response => {    
+      console.log(response.data);
     } ).then(() => {
         dispatch({ type: 'SIGNUP_SUCCESS' });
       }).catch((err) => {
