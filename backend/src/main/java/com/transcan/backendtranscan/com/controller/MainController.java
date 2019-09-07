@@ -57,7 +57,7 @@ public class MainController {
     }
 
     @PostMapping("/islogin")
-    public void isLogin(@Valid @RequestBody Stringuser_roles loginCheckRequest) {
+    public void isLogin(@Valid @RequestBody String loginCheckRequest) {
         System.out.println(loginCheckRequest+" token ");
 
     }
