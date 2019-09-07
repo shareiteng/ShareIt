@@ -4,12 +4,26 @@ import cover1 from '../../img/cover1.jpg'
 import LogOutLinks from './LogOutLinks'
 import LogInLinks from './LogInLinks'
 import{connect }from 'react-redux'
-
+import LocalStorageService from '../../LocalStorageService';
+import { signOut } from '../../store/actions/AuthActions';
+import { isPipelinePrimaryTopicReference } from '@babel/types';
+import {isLogin} from '../../TranscanApi'
 
 
 const  NavigationBar=(props)=>{
-        const {auth}=props;
-        const links= auth ?<LogInLinks />: <LogOutLinks />
+        
+        console.log("********   "+LocalStorageService.getFromLocal("transanUserID"));
+  //      console.log("***2222*****   "+props.auth);
+        
+      isLogin(LocalStorageService.getFromLocal("transanUserID")).then(response => {});
+        let a=null; 
+        isLogin(LocalStorageService.getFromLocal("transanUserID"));
+      if(a===null)
+      a=null;
+      else a="sss";
+
+
+        const links= a?<LogInLinks />: <LogOutLinks />
         return(
           
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
@@ -37,9 +51,11 @@ const  NavigationBar=(props)=>{
         )
     
 }
+
+//TODO
 const mapStateToProps=(state) => {
   return{
-    auth: state.auth
+    auth: LocalStorageService.getFromLocal("transcanUserID")
   }
 }
 

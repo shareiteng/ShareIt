@@ -38,7 +38,7 @@ class SignIn extends Component{
 <form className="form" onSubmit={this.handleSubmit}>
                             <div className="input-field">
                                 <label htmlFor="usernameOrEmail">{this.formInput('usernameOrEmail')}</label>
-                                <input type="usernameOrEmail" id='usernameOrEmail' onChange={this.handleChange} />
+                                <input type="text" id='usernameOrEmail' onChange={this.handleChange} />
                             </div>
                             
                             <div className="input-field">

@@ -1,42 +1,49 @@
+import LocalStorageService from "../../LocalStorageService";
+
 const initState = {
     authError: null,
     auth:null
   }
   
-  const authReducer = (state = initState, action) => {
+  const authReducer=  (state = {
+    auth : LocalStorageService.getFromLocal("transcanUserId") 
+}, action)=> {
     switch(action.type){
       case 'LOGIN_ERROR':
-        console.log('login error');
-        console.log( state);
+       // console.log('login error');
+     //   console.log( state);
         return {
           ...state,
           authError: 'Login failed'
         }
       case 'LOGIN_SUCCESS':
      // window.location.href="/search" 
-      //console.log('login success'+ state);
+     //LocalStorageService.saveToLocal("transanUserID", "transanUserID");
         return {
           ...state,
-          auth:'login',
+          auth: LocalStorageService.getFromLocal("transanUserID"),
           authError: null
         }
 
         case 'SIGNOUT_SUCCESS':
          console.log('signout success');
-        // window.location.href="/" 
+         LocalStorageService.removeFromLocal("transcanUserId");
+          localStorage.clear();
+        console.log (LocalStorageService.getFromLocal("transcanUserId"));
+      //   window.location.href="/" 
          return {
           ...state,
           authError: null,
-          auth: null
+          auth: action.user
           }
          
         case 'SIGNUP_SUCCESS':
-            //window.location.href="/search" 
+         window.alert("SignUp sucssesed, please Log In ");
             console.log('signup success')
          return {
         ...state,
         authError: null,
-        auth: 'login'
+        
         }
 
   case 'SIGNUP_ERROR':

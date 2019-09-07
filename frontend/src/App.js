@@ -7,9 +7,12 @@ import FooterCom from './components/layouts/FooterCom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import NewDrive from './components/shareItContent/newDrive/NewDrive'
 import Profile from './components/shareItContent/Profile';
+import {isLogin} from './TranscanApi'
+import LocalStorageService from './LocalStorageService';
 
 
 function App() {
+ //if(isLogin(LocalStorageService.getFromLocal("transanUserID")))
   return (
     <BrowserRouter>
             <div className="App">
@@ -23,8 +26,10 @@ function App() {
               <FooterCom/>
             </div>
           </BrowserRouter>)
+         
           ;
 
 }
+
 
 export default App;

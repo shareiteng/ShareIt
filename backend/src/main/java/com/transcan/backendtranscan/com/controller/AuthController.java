@@ -47,6 +47,13 @@ public class AuthController {
     @Autowired
     JwtTokenProvider tokenProvider;
 
+    @PostMapping("/islogin")
+    public void isLogin(@Valid @RequestBody String loginCheckRequest) {
+        System.out.println(loginCheckRequest+" token ");
+
+    }
+
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 

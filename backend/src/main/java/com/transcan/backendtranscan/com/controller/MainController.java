@@ -55,6 +55,12 @@ public class MainController {
         }
         return false;
     }
+
+    @PostMapping("/islogin")
+    public void isLogin(@Valid @RequestBody Stringuser_roles loginCheckRequest) {
+        System.out.println(loginCheckRequest+" token ");
+
+    }
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<UserInfo> getAllUsers(){
         return userInfoService.findAll();

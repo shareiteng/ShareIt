@@ -146,8 +146,7 @@ class SignUp extends Component{
                 </Container>
                    
                 </div>
-           
-                
+ 
         )
     }
 }
