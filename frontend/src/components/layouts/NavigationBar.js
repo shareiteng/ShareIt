@@ -4,11 +4,24 @@ import cover1 from '../../img/cover1.jpg'
 import LogOutLinks from './LogOutLinks'
 import LogInLinks from './LogInLinks'
 import{connect }from 'react-redux'
+import {isLogin, login} from '../../TranscanApi'
+import LocalStorageService from '../../LocalStorageService';
+import { loggedCheck } from '../../store/actions/AuthActions';
+
+
+
 
 
 
 const  NavigationBar=(props)=>{
-        const {auth}=props;
+  
+     //   console.log("STORAGE:"+LocalStorageService.getFromLocal("transanUserID"));
+    
+
+        const auth=props.auth;
+        console.log("auth"+auth);
+        
+        
         const links= auth ?<LogInLinks />: <LogOutLinks />
         return(
           
@@ -29,7 +42,7 @@ const  NavigationBar=(props)=>{
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
                     </Nav>
-                   
+                
                     {links}   
                  </Navbar.Collapse>
             </Navbar>
@@ -37,11 +50,13 @@ const  NavigationBar=(props)=>{
         )
     
 }
+
 const mapStateToProps=(state) => {
   return{
     auth: state.auth
   }
 }
+
 
 export default connect(mapStateToProps )(NavigationBar)
  

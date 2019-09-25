@@ -65,8 +65,10 @@ class SignUp extends Component{
                             <Media.Body>
                                 <h5>Who we are? </h5>
                                 <p>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                                ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
+                                Transacane is a smart transformation application for help you to share 
+                                your ride in the best way with other people. Togther we will match the best 
+                                vehicle for take you and more people in your location to common  desteny 
+                                point in the chipest and faster way.
                                
                                 </p>
                             </Media.Body>
@@ -77,16 +79,24 @@ class SignUp extends Component{
                             <img
                                
                                 className="mr-3 ava"
-                                width={140}
-                                height={140}
+                                width={160}
+                                height={160}
                                 src={img3}
                                 alt="Generic placeholder"
                             />
                             <Media.Body>
                                 <h5>why you must to join us?</h5>
-                                <p>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                                ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
+                           <p>
+                               Transcan lead a real revolotaion in the Cooperative transportation world, 
+                               we develop the best algoritms to match the best vehicle for every ride and 
+                               for maximum moeny and time saving. 
+                               We offer you to join to a speicial monthly subscription that allow you to get your desteny 
+                               with carpool, texi, minibus, or bus in fixed price and we commit that this ride will
+                               heppend in any case, so you can be sure you will get your work place every mornning, 
+                               get a ride for the weekly family friday meal and etc.. 
+                               In addition, we cause to everyone who have a vehicle and common rout with other people
+                               to save moeny, earn from the ride, and enjoy from special Tax Benefits.
+
                               
                                 </p>
                             </Media.Body>
@@ -105,13 +115,14 @@ class SignUp extends Component{
                             <Media.Body>
                                 <h5>For a better World</h5>
                                 <p>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                                ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                                tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-                                Donec lacinia congue felis in faucibus.
+                                    In Every time you use the app, you get a car off the road, lowering traffic
+                                    jam and Saves air pollution. 
+
                                 </p>
                             </Media.Body>
                             </Media>
+                            <br/>
+                            <br/>
                             </Container>
                 </div>
                 

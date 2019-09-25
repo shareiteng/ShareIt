@@ -1,4 +1,5 @@
 import axios from "axios";
+import localStorageService from './LocalStorageService'
 
 const api = "http://localhost:5000/api/auth"
 
@@ -12,4 +13,9 @@ export const addNewUser = (query) =>
   axios.post(`${api}/signup`, query);
 
 export  const login = (query) =>
-  axios.post(`${api}/signin`,query)
+  axios.post(`${api}/signin`,query  
+    );
+
+export  const isLogin = (query) =>
+   axios.post(`${api}/islogin`,query  
+    );

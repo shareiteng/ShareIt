@@ -1,14 +1,31 @@
 
 import {login} from '../../TranscanApi'
 import {addNewUser} from '../../TranscanApi'
-export const signIn = (user) => {
-    return (dispatch) => {
-     
-           
+import LocalStorageService from '../../LocalStorageService';
+import {isLogin} from '../../TranscanApi'
+
+export const loggedCheck =() => {
+  return (dispatch) => {          
+    isLogin(LocalStorageService.getFromLocal("transanUserID")).then(response => {
+      if(response.data){
+        dispatch({ type: 'logged' });
+      }
+      else  {
+        // 
+      dispatch({ type: 'unlogged' });
+    }
+});
+  }
+}
+export const signIn = (user, history) => {
+    return (dispatch) => {          
       login(user).then(response => {
-        console.log(response.data);
-        if(response.data)
+        if(response.data){
+          LocalStorageService.saveToLocal("transanUserID", response.data.accessToken);
         dispatch({ type: 'LOGIN_SUCCESS' });
+        console.log(response.data.accessToken);
+        console.log("InLocalStorage: "+ LocalStorageService.getFromLocal("transanUserID"));
+        }
         else
         dispatch({ type: 'LOGIN_ERROR'});
       });
@@ -18,7 +35,6 @@ export const signIn = (user) => {
 export const signUp = (newUser) => {
   return (dispatch) => {
     addNewUser(newUser).then(response => {    
-      console.log(response.data);
     } ).then(() => {
         dispatch({ type: 'SIGNUP_SUCCESS' });
       }).catch((err) => {
@@ -28,13 +44,13 @@ export const signUp = (newUser) => {
   }
 
   export const signOut = () => {
+    LocalStorageService.saveToLocal("transanUserID", "loggedout");
     return (dispatch) => {
+
+      window.location.href="/"
+
         dispatch({ type: 'SIGNOUT_SUCCESS' })
       };
+    }
     
-  }
-         
-  
     
-  
-  

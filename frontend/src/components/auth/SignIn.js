@@ -9,8 +9,10 @@ class SignIn extends Component{
   
     state = {
         usernameOrEmail: '',
-        password:''
+        password:'',
+        history:''
       }
+      
       handleChange = (e) => {
         this.setState({
           [e.target.id]: e.target.value
@@ -20,9 +22,7 @@ class SignIn extends Component{
    
         handleSubmit = (e) => {
          e.preventDefault();
-         this.props.signIn(this.state)
-         
-        
+         this.props.signIn(this.state, this.props.history)
         }
     
        formInput = (input) => {
@@ -38,7 +38,7 @@ class SignIn extends Component{
 <form className="form" onSubmit={this.handleSubmit}>
                             <div className="input-field">
                                 <label htmlFor="usernameOrEmail">{this.formInput('usernameOrEmail')}</label>
-                                <input type="usernameOrEmail" id='usernameOrEmail' onChange={this.handleChange} />
+                                <input type="text" id='usernameOrEmail' onChange={this.handleChange} />
                             </div>
                             
                             <div className="input-field">
@@ -66,7 +66,7 @@ class SignIn extends Component{
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signIn: (creds) => dispatch(signIn(creds))
+    signIn: (creds, history) => dispatch(signIn(creds, history))
   }
 }
 

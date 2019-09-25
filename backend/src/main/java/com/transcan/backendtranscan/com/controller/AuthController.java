@@ -47,6 +47,12 @@ public class AuthController {
     @Autowired
     JwtTokenProvider tokenProvider;
 
+    @PostMapping("/islogin")
+    public ResponseEntity<?> isLogin( @Valid @RequestBody String  loginRequest) {
+         boolean isLogged=tokenProvider.validateToken(loginRequest);
+        return ResponseEntity.ok(isLogged);
+    }
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 

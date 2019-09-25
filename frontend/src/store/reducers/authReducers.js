@@ -1,3 +1,4 @@
+
 const initState = {
     authError: null,
     auth:null
@@ -12,8 +13,24 @@ const initState = {
           ...state,
           authError: 'Login failed'
         }
+      case 'logged':
+        console.log("kkk");
+          return {
+            ...state,
+            auth:'login',
+            authError: null
+          }
+          case 'unlogged':
+            
+              console.log("unlog");
+              return {
+                ...state,
+                auth:null,
+                authError: null
+              }
+
       case 'LOGIN_SUCCESS':
-     // window.location.href="/search" 
+      window.location.href="/search" 
       //console.log('login success'+ state);
         return {
           ...state,
@@ -31,8 +48,9 @@ const initState = {
           }
          
         case 'SIGNUP_SUCCESS':
-            //window.location.href="/search" 
-            console.log('signup success')
+            window.location.href="/search" 
+            console.log('signup success');
+          
          return {
         ...state,
         authError: null,
