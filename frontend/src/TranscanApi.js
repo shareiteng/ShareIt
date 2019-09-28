@@ -17,5 +17,5 @@ export  const login = (query) =>
     );
 
 export  const isLogin = (query) =>
-   axios.post(`${api}/islogin`,query  
+   axios.post(`${api}/islogin`,query   
     );
