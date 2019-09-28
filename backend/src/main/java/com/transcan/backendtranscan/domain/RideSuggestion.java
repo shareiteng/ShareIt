@@ -24,7 +24,8 @@ public class RideSuggestion {
     private String date;
     private  String houers;
 
-
+    @ManyToMany(mappedBy = "vehicleUse")
+    Set<VehicleInfo> likes;
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserInfo userInfo;
