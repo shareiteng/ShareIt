@@ -2,7 +2,7 @@ import React, { Component} from 'react'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form';
 import { Row, Col } from 'react-bootstrap';
-import {submit} from '../../../store/actions/SearchActions'
+import {searchSubmit} from '../../../store/actions/SearchActions'
 
 
 class SearchBar extends Component{
@@ -21,10 +21,10 @@ class SearchBar extends Component{
       handleSubmit = (e) => {
         e.preventDefault();
 
-        this.props.submit(this.state);
+        this.props.searchSubmit(this.state);
    
         console.log(this.state);
-        x
+        
       }
     
     render(){

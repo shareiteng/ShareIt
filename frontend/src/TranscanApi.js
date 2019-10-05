@@ -13,13 +13,16 @@ export const addNewUser = (query) =>
   axios.post(`${api}/signup`, query);
 
 export  const login = (query) =>
-  axios.post(`${api}/signin`,query  
-    );
+  axios.post(`${api}/signin`,query );
 
 export  const isLogin = (query) =>
-   axios.post(`${api}/islogin`,query   
-    );
+   axios.post(`${api}/islogin`,query);
 
-    export  const searchSubmit = (query) =>
-   axios.post(`${api}/searchsubmit`,query   )
-   ;
+  export  const sSubmit = (query) =>
+   axios.post(`${api}/searchsubmit`,query);
+
+   export  const nDSubmit = (query) =>
+   axios.post(`${api}/newDriveSubmit`,query);
+
+
+  
