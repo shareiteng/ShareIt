@@ -1,107 +1,47 @@
 package com.transcan.backendtranscan.com.controller;
 
+import com.transcan.backendtranscan.domain.RideSearch;
 import com.transcan.backendtranscan.domain.Role;
 import com.transcan.backendtranscan.domain.RoleName;
 import com.transcan.backendtranscan.domain.UserInfo;
 import com.transcan.backendtranscan.exception.AppException;
 import com.transcan.backendtranscan.payload.ApiResponse;
-import com.transcan.backendtranscan.payload.JwtAuthenticationResponse;
-import com.transcan.backendtranscan.payload.LoginRequest;
-import com.transcan.backendtranscan.payload.SignUpRequest;
-import com.transcan.backendtranscan.security.JwtTokenProvider;
-import com.transcan.backendtranscan.services.RoleService;
+import com.transcan.backendtranscan.services.SearchRideService;
 import com.transcan.backendtranscan.services.UserInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jdk.nashorn.internal.runtime.OptimisticBuiltins;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
 
+
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/search_submit")
 public class SearchController {
-    @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
-    UserInfoService userInfoService;
-
-    @Autowired
-    RoleService roleRepository;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    JwtTokenProvider tokenProvider;
-
-    @PostMapping("/islogin")
-    public ResponseEntity<?> isLogin( @Valid @RequestBody String  loginRequest) {
-         boolean isLogged=tokenProvider.validateToken(loginRequest);
-        return ResponseEntity.ok(isLogged);
-    }
-
-    @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsernameOrEmail(),
-                        loginRequest.getPassword()
-                )
-        );
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String jwt = tokenProvider.generateToken(authentication);
-        System.out.println(jwt);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
-    }
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-
-        System.out.println(signUpRequest.toString()+"sss");
-        if(userInfoService.existsByUsername(signUpRequest.getUsername())) {
-            return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
+    private SearchRideService searchRideService;
+    private UserInfoService userInfoService;
+    @PostMapping("/submit")
+    public ResponseEntity<?> submit(@Valid @RequestBody RideSearch rideSearch,@Valid @RequestParam Long userId) {
+        if(!userInfoService.existsById(userId)) {
+            return new ResponseEntity(new ApiResponse(false, "Username does not exist!"),
                     HttpStatus.BAD_REQUEST);
         }
 
-        if(userInfoService.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
-                    HttpStatus.BAD_REQUEST);
-        }
-
-        // Creating user's account
-        UserInfo user = new UserInfo(signUpRequest.getUsername(),signUpRequest.getEmail(),
-                signUpRequest.getPassword(),signUpRequest.getFirstname(),signUpRequest.getLastname());
-
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                .orElseThrow(() -> new AppException("User Role not set."));
-
-        user.setRoles(Collections.singleton(userRole));
-
-        UserInfo result = userInfoService.save(user);
-
+        RideSearch result =userInfoService.findById(userId).map(users -> {
+            rideSearch.setUserInfo(users);
+            return searchRideService.save(rideSearch);});
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api/users/{username}")
-                .buildAndExpand(result.getUsername()).toUri();
-
+                .buildAndExpand(result.getSearchId()).toUri();
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+
+        }).orElseThrow(() -> new AppException("User ID " + userId + " not found"));
     }
 
+    }
 }
+
