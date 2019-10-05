@@ -20,10 +20,11 @@ class SearchBar extends Component{
       }
       handleSubmit = (e) => {
         e.preventDefault();
+
         this.props.submit(this.state);
    
         console.log(this.state);
-        
+        x
       }
     
     render(){

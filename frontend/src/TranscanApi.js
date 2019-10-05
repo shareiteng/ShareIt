@@ -19,3 +19,7 @@ export  const login = (query) =>
 export  const isLogin = (query) =>
    axios.post(`${api}/islogin`,query   
     );
+
+    export  const searchSubmit = (query) =>
+   axios.post(`${api}/searchsubmit`,query   )
+   ;

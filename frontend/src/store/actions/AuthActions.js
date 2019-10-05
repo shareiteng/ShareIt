@@ -11,7 +11,6 @@ export const loggedCheck =() => {
         dispatch({ type: 'logged' });
       }
       else  {
-        // 
       dispatch({ type: 'unlogged' });
     }
 });
