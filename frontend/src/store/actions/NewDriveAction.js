@@ -1,8 +1,8 @@
-import { sSubmit } from "../../TranscanApi";
+import { nDSubit } from "../../TranscanApi";
 
-export const searchSubmit = (newride) => {
+export const submit = (newDrive) => {
     return (dispatch) => {
-      sSubmit(newride).then(response => {    
+        nDSubmit(newDrive).then(response => {    
       } ).then(() => {
           dispatch({ type: 'SUBMIT_SUCCESS' });
         }).catch((err) => {
