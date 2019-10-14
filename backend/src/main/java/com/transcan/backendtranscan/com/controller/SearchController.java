@@ -14,9 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
+import java.util.Optional;
 
 
 @RestController
@@ -24,24 +26,25 @@ import java.util.Collections;
 public class SearchController {
     private SearchRideService searchRideService;
     private UserInfoService userInfoService;
+
+
     @PostMapping("/submit")
     public ResponseEntity<?> submit(@Valid @RequestBody RideSearch rideSearch,@Valid @RequestParam Long userId) {
-        if(!userInfoService.existsById(userId)) {
-            return new ResponseEntity(new ApiResponse(false, "Username does not exist!"),
-                    HttpStatus.BAD_REQUEST);
+
+
+        Optional<UserInfo> u =userInfoService.findById(userId);//not working
+        if (u.isPresent()) {
+            rideSearch.setUserInfo(u.get());
+            RideSearch result = searchRideService.save(rideSearch);
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentContextPath().path("/api/users/{username}")
+                    .buildAndExpand(result.getSearchId()).toUri();
+            return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
         }
-
-        RideSearch result =userInfoService.findById(userId).map(users -> {
-            rideSearch.setUserInfo(users);
-            return searchRideService.save(rideSearch);});
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/users/{username}")
-                .buildAndExpand(result.getSearchId()).toUri();
-        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
-
-        }).orElseThrow(() -> new AppException("User ID " + userId + " not found"));
-    }
+        return new ResponseEntity(new ApiResponse(false, "Username does not exist!"),
+                    HttpStatus.BAD_REQUEST);
 
     }
+
 }
 
