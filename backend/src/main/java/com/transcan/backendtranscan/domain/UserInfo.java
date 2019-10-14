@@ -48,7 +48,7 @@ public class UserInfo extends DateAudit {
     @OneToOne
     private RideSuggestion rideSuggestion;
 
-    @OneToOne
+    @ManyToOne
     private RideSearch rideSearch;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -143,6 +143,19 @@ public class UserInfo extends DateAudit {
         this.roles = roles;
     }
 
+    public RideSuggestion getRideSuggestion() {
+        return rideSuggestion;
+    }
 
+    public void setRideSuggestion(RideSuggestion rideSuggestion) {
+        this.rideSuggestion = rideSuggestion;
+    }
 
+    public RideSearch getRideSearch() {
+        return rideSearch;
+    }
+
+    public void setRideSearch(RideSearch rideSearch) {
+        this.rideSearch = rideSearch;
+    }
 }
