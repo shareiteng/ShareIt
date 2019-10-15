@@ -16,7 +16,6 @@ public class RideSearch{
     private String desination;
     private String date;
     private  String houers;
-    private long userId;
     @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserInfo userInfo;

@@ -15,7 +15,6 @@ public class RideSuggestion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long driverId;
-    private long userId;
     private String distination;
     private String location;
 
