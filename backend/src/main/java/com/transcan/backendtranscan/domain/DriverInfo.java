@@ -9,11 +9,12 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class VehicleInfo {
+public class DriverInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private long driverid;
+    private String address;
     private long vehicleid;
-    private String vehicletype;
-    private int seat;
+    private long userid;
 }

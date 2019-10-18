@@ -45,12 +45,6 @@ public class UserInfo extends DateAudit {
 
     private long score;
 
-    @OneToOne
-    private RideSuggestion rideSuggestion;
-
-    @ManyToOne
-    private RideSearch rideSearch;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -143,19 +137,5 @@ public class UserInfo extends DateAudit {
         this.roles = roles;
     }
 
-    public RideSuggestion getRideSuggestion() {
-        return rideSuggestion;
-    }
 
-    public void setRideSuggestion(RideSuggestion rideSuggestion) {
-        this.rideSuggestion = rideSuggestion;
-    }
-
-    public RideSearch getRideSearch() {
-        return rideSearch;
-    }
-
-    public void setRideSearch(RideSearch rideSearch) {
-        this.rideSearch = rideSearch;
-    }
 }
