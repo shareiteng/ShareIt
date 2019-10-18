@@ -51,6 +51,7 @@ public class UserInfo extends DateAudit {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<RideSearch> rideSearch = new HashSet<RideSearch>(0);
 
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -141,14 +142,6 @@ public class UserInfo extends DateAudit {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public RideSuggestion getRideSuggestion() {
-        return rideSuggestion;
-    }
-
-    public void setRideSuggestion(RideSuggestion rideSuggestion) {
-        this.rideSuggestion = rideSuggestion;
     }
 
     public Set<RideSearch> getRideSearch() {

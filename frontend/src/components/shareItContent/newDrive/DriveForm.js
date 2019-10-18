@@ -10,6 +10,7 @@ class DriveForm extends Component{
       location:'',
       distinatin:'', 
       date:'',
+      hour:'',
       stops:'',
       carId: '',
       carType:'',
