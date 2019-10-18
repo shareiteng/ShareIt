@@ -6,14 +6,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
+import java.sql.Time;
 
 @Data
 @Entity
-public class VehicleInfo {
+public class RideInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private long rideid;
+    private String rorigin;
+    private  String rdestination;
+    private Date rdate;
+    private Time rhour;
     private long vehicleid;
-    private String vehicletype;
-    private int seat;
+    private String remarks;
 }
