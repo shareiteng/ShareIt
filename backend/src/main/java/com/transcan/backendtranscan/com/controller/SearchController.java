@@ -34,19 +34,20 @@ public class SearchController {
     private UserInfoService userInfoService;
 
 
-    @PostMapping("/submit")
+    @PostMapping("/searchsubmit")
     public ResponseEntity<?> submit(@Valid @RequestBody RideSearch rideSearch,@Valid @RequestParam Long userId) {
 
         try {
-
-            UserInfo u = userInfoService.findId(userId).orElse(null);
+            rideSearch.setHours(rideSearch.getDate().substring(11));
+            rideSearch.setDate(rideSearch.getDate().substring(0,10));
+            UserInfo u = userInfoService.findById(userId).orElse(null);
             if (u != null) {
                 rideSearch.setUserInfo(u);
                 RideSearch result = searchRideService.save(rideSearch);
                 URI location = ServletUriComponentsBuilder
                         .fromCurrentContextPath().path("/api/users/{username}")
                         .buildAndExpand(result.getSearchId()).toUri();
-                return ResponseEntity.created(location).body(new ApiResponse(true, "ride search registered successfully"));
+                return ResponseEntity.created(location).body(new ApiResponse(true, "ride search registered successfully"+ rideSearch.getDate()+"aaaaa"+rideSearch.getHours()));
             }
         } catch (Exception e) {
             return new ResponseEntity(new ApiResponse(false, "user does not exist!"),

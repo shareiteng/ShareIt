@@ -45,11 +45,11 @@ public class UserInfo extends DateAudit {
 
     private long score;
 
-    @OneToOne
+    @ManyToOne
     private RideSuggestion rideSuggestion;
 
-    @ManyToOne
-    private RideSearch rideSearch;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<RideSearch> rideSearch = new HashSet<RideSearch>(0);
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -151,11 +151,11 @@ public class UserInfo extends DateAudit {
         this.rideSuggestion = rideSuggestion;
     }
 
-    public RideSearch getRideSearch() {
+    public Set<RideSearch> getRideSearch() {
         return rideSearch;
     }
 
-    public void setRideSearch(RideSearch rideSearch) {
+    public void setRideSearch(Set<RideSearch> rideSearch) {
         this.rideSearch = rideSearch;
     }
 }

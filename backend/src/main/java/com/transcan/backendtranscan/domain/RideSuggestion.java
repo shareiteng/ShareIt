@@ -17,7 +17,6 @@ public class RideSuggestion {
     private long driverId;
     private String distination;
     private String location;
-
     private String days;
     private  String remarks;
     private String date;
@@ -25,7 +24,7 @@ public class RideSuggestion {
 
     @ManyToMany(mappedBy = "vehicleUse")
     Set<VehicleInfo> likes;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserInfo userInfo;
 
