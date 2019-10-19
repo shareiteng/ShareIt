@@ -2,22 +2,35 @@ import React, { Component} from 'react'
 import { Container} from 'react-bootstrap';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
+import {submit} from'../../../store/actions/NewDriveAction'
+import{connect }from 'react-redux'
 
 class DriveForm extends Component{
 
-    state = {
-      subscription: false,
-      location:'',
-      distinatin:'', 
-      date:'',
-      hour:'',
-      stops:'',
-      carId: '',
-      carType:'',
-      seatsNum:'',
-      remarks:'',
-      tab:''
+
+  constructor(){
+    super()
+
+    this.state = {
+      rideSuggestion:{
+        location:'das',
+        destinatin:'fw', 
+        date:'q',
+        hours:'qwee',
+        value:'eee',
+        remarks:'eee',
+      },
+      
+      vihecle:{
+        vehicleNumber: '111',
+        vehicletype:'122',
+        seat:1
       }
+      }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+}
+    
       handleChange = (e) => {
         this.setState({
           [e.target.id]: e.target.value
@@ -27,6 +40,7 @@ class DriveForm extends Component{
      
       handleSubmit = (e) => {
         e.preventDefault();
+        this.props.submit([this.state.rideSuggestion],[this.state.vihecle])
         
         console.log(this.state);
       }
@@ -48,7 +62,7 @@ class DriveForm extends Component{
                 <input type="text" id='location' onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="distination">Distination</label>
+                <label htmlFor="destination">Distination</label>
                 <input type="text" id='distination' onChange={this.handleChange} />
             </div>
             <div className="input-field">
@@ -100,4 +114,13 @@ class DriveForm extends Component{
     
   }
 }
-export default DriveForm
+
+
+const mapDispatchToProps = (dispatch)=> {
+  return {
+    submit: (creds) => dispatch(submit(creds))
+  }
+}
+
+
+export default connect(null,mapDispatchToProps)(DriveForm)

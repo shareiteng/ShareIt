@@ -1,6 +1,7 @@
 package com.transcan.backendtranscan.domain;
 
 import lombok.Data;
+import org.apache.logging.log4j.message.StringFormattedMessage;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -17,6 +18,7 @@ public class VehicleInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long vehicleid;
+    private String vehicleNumber;
     private String vehicletype;
     private int seat;
 

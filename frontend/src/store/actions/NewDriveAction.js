@@ -1,8 +1,8 @@
-import { nDSubit } from "../../TranscanApi";
+import { driverSubmit } from "../../TranscanApi";
 
 export const submit = (newDrive) => {
     return (dispatch) => {
-        nDSubmit(newDrive).then(response => {    
+      driverSubmit(newDrive).then(response => {    
       } ).then(() => {
           dispatch({ type: 'SUBMIT_SUCCESS' });
         }).catch((err) => {

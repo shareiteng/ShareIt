@@ -1,32 +1,25 @@
 package com.transcan.backendtranscan.com.controller;
 
 import com.transcan.backendtranscan.domain.RideSearch;
-import com.transcan.backendtranscan.domain.Role;
-import com.transcan.backendtranscan.domain.RoleName;
+import com.transcan.backendtranscan.domain.RideSuggestion;
 import com.transcan.backendtranscan.domain.UserInfo;
-import com.transcan.backendtranscan.exception.AppException;
+import com.transcan.backendtranscan.domain.VehicleInfo;
 import com.transcan.backendtranscan.payload.ApiResponse;
-import com.transcan.backendtranscan.services.RoleService;
 import com.transcan.backendtranscan.services.SearchRideService;
 import com.transcan.backendtranscan.services.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.persistence.EntityManager;
-import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Collections;
-import java.util.Optional;
+
 
 
 @RestController
-@RequestMapping("/api/search_submit")
-public class SearchController {
+@RequestMapping("/api/form_submit")
+public class FormController {
     @Autowired
     private SearchRideService searchRideService;
     @Autowired
@@ -55,9 +48,13 @@ public class SearchController {
         }
         return new ResponseEntity(new ApiResponse(false, "something went wrong please try again"),
                 HttpStatus.BAD_REQUEST);
+    }
+    @PostMapping("/driversubmit")
+    public ResponseEntity<?> submit1(@Valid @RequestBody RideSuggestion rideSuggestion, @Valid @RequestBody VehicleInfo vehicleInfo, @Valid @RequestParam Long userId) {
 
 
-
+        return new ResponseEntity(new ApiResponse(false, rideSuggestion.toString() + " aaaaa " + vehicleInfo.toString()),
+                HttpStatus.BAD_REQUEST);
     }
 }
 

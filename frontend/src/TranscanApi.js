@@ -22,8 +22,15 @@ export  const isLogin = (query) =>
     );
 
 export  const searchSubmit = (query) =>
-    axios.post(`${api}/search_submit/searchsubmit`,query, {
+    axios.post(`${api}/form_submit/searchsubmit`,query, {
       params: {
-        userId: 1
+        userId: 2
       }} );
+
+    
+export  const driverSubmit = (query, query1 ) =>
+axios.post(`${api}/form_submit/driversubmit`,query, query1, {
+  params: {
+    userId: 1
+  }} );
 

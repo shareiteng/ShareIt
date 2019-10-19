@@ -15,12 +15,12 @@ public class RideSuggestion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long driverId;
-    private String distination;
+    private String destinatin;
     private String location;
-    private String days;
+    private String value;
     private  String remarks;
     private String date;
-    private  String houers;
+    private  String hours;
 
     @ManyToMany(mappedBy = "vehicleUse")
     Set<VehicleInfo> likes;
