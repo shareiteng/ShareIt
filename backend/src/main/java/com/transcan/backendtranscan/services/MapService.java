@@ -12,17 +12,19 @@ import java.io.IOException;
 
 public class MapService {
 
-    public static LatLng getGeolocation(String address) throws InterruptedException, ApiException, IOException {
+    public static String getGeolocation(String address) throws InterruptedException, ApiException, IOException {
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey("AIzaSyDCv8LRiSPWaEvGcRELhW1dOnbEYn92a0A")
                 .build();
         GeocodingResult[] results = GeocodingApi.geocode(context,
-                "מאיר שפיה 9, פתח תקווה").await();
+                address).await();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        return(results[0].geometry.location);
+        return(results[0].geometry.location.toString());
     }
 
-    public static void getDistanceGeolocation(){
+    public static double getDistanceGeoLocation(){
+
+        return 500.0;
 
     }
 
