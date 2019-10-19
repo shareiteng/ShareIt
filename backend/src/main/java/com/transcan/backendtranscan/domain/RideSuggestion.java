@@ -14,16 +14,18 @@ public class RideSuggestion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long driverId;
+    private long suggestionId;
     private String destinatin;
     private String location;
-    private String value;
+    private String days;
     private  String remarks;
     private String date;
-    private  String hours;
+    private String hours;
+    private String vehicleNumber;
+    private String vehicleType;
+    private int seats;
 
-    @ManyToMany(mappedBy = "vehicleUse")
-    Set<VehicleInfo> likes;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserInfo userInfo;

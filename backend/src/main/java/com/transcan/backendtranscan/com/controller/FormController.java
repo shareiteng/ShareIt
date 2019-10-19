@@ -3,8 +3,8 @@ package com.transcan.backendtranscan.com.controller;
 import com.transcan.backendtranscan.domain.RideSearch;
 import com.transcan.backendtranscan.domain.RideSuggestion;
 import com.transcan.backendtranscan.domain.UserInfo;
-import com.transcan.backendtranscan.domain.VehicleInfo;
 import com.transcan.backendtranscan.payload.ApiResponse;
+import com.transcan.backendtranscan.services.RideSuggestionService;
 import com.transcan.backendtranscan.services.SearchRideService;
 import com.transcan.backendtranscan.services.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,12 @@ public class FormController {
     private SearchRideService searchRideService;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private RideSuggestionService rideSuggestionService;
 
 
     @PostMapping("/searchsubmit")
-    public ResponseEntity<?> submit(@Valid @RequestBody RideSearch rideSearch,@Valid @RequestParam Long userId) {
+    public ResponseEntity<?> searchSubmit(@Valid @RequestBody RideSearch rideSearch,@Valid @RequestParam Long userId) {
 
         try {
             rideSearch.setHours(rideSearch.getDate().substring(11));
@@ -49,11 +51,28 @@ public class FormController {
         return new ResponseEntity(new ApiResponse(false, "something went wrong please try again"),
                 HttpStatus.BAD_REQUEST);
     }
-    @PostMapping("/driversubmit")
-    public ResponseEntity<?> submit1(@Valid @RequestBody RideSuggestion rideSuggestion, @Valid @RequestBody VehicleInfo vehicleInfo, @Valid @RequestParam Long userId) {
+    @PostMapping("/suggestionsubmit")
+    public ResponseEntity<?> suggestionSubmit(@Valid @RequestBody RideSuggestion rideSuggestion, @Valid @RequestParam Long userId) {
 
 
-        return new ResponseEntity(new ApiResponse(false, rideSuggestion.toString() + " aaaaa " + vehicleInfo.toString()),
+        try {
+            rideSuggestion.setHours(rideSuggestion.getDate().substring(11));
+            rideSuggestion.setDate(rideSuggestion.getDate().substring(0,10));
+            UserInfo u = userInfoService.findById(userId).orElse(null);
+            if (u != null) {
+                rideSuggestion.setUserInfo(u);
+                RideSuggestion result = rideSuggestionService.save(rideSuggestion);
+                URI location = ServletUriComponentsBuilder
+                        .fromCurrentContextPath().path("/api/users/{username}")
+                        .buildAndExpand(result.getSuggestionId()).toUri();
+                return ResponseEntity.created(location).body(new ApiResponse(true, "ride suggestion registered successfully"));
+            }
+        } catch (Exception e) {
+            return new ResponseEntity(new ApiResponse(false, "user does not exist!"),
+                    HttpStatus.BAD_REQUEST);
+
+        }
+        return new ResponseEntity(new ApiResponse(false, "something went wrong please try again"),
                 HttpStatus.BAD_REQUEST);
     }
 }

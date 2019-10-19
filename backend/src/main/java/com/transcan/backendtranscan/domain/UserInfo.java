@@ -45,8 +45,8 @@ public class UserInfo extends DateAudit {
 
     private long score;
 
-    @ManyToOne
-    private RideSuggestion rideSuggestion;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<RideSuggestion> rideSuggestion = new HashSet<RideSuggestion>(0);
 
     @OneToMany(cascade = CascadeType.ALL)
     private Set<RideSearch> rideSearch = new HashSet<RideSearch>(0);
