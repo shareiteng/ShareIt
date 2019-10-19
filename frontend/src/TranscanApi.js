@@ -1,7 +1,7 @@
 import axios from "axios";
 import localStorageService from './LocalStorageService'
 
-const api = "http://localhost:5000/api/auth"
+const api = "http://localhost:5000/api"
 
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token
@@ -10,12 +10,20 @@ if (!token)
 
 
 export const addNewUser = (query) =>
-  axios.post(`${api}/signup`, query);
+  axios.post(`${api}/auth/signup`, query);
 
 export  const login = (query) =>
-  axios.post(`${api}/signin`,query  
+
+  axios.post(`${api}/auth/signin`,query  
     );
 
 export  const isLogin = (query) =>
-   axios.post(`${api}/islogin`,query  
+  axios.post(`${api}/auth/signin`,query  
     );
+
+export  const searchSubmit = (query) =>
+    axios.post(`${api}/search_submit/searchSubmit`,query, {
+      params: {
+        userId: 1
+      }} );
+

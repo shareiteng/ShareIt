@@ -2,7 +2,7 @@
 import {login} from '../../TranscanApi'
 import {addNewUser} from '../../TranscanApi'
 import LocalStorageService from '../../LocalStorageService';
-import {isLogin} from '../../TranscanApi'
+import {isLogin, searchSubmit} from '../../TranscanApi'
 
 export const loggedCheck =() => {
   return (dispatch) => {          
@@ -51,6 +51,21 @@ export const signUp = (newUser) => {
 
         dispatch({ type: 'SIGNOUT_SUCCESS' })
       };
+
+      
     }
+
+    export const sSubmit =(aa) => {
+      return (dispatch) => {          
+        searchSubmit(aa).then(response => {
+    
+          if(response.data){
+            dispatch({ type: 'searchSubmitSuccess' });
+          }
+          else  {
+          dispatch({ type: 'searchSubmitUnSuccess' });
+        }
+    });
+      }}
     
     

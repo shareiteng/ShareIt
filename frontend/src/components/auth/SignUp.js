@@ -28,10 +28,7 @@ class SignUp extends Component{
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.signUp(this.state);
-   
 
-
-      
     }
     formInput = (input, text) => {
     if(this.state[input]==="")

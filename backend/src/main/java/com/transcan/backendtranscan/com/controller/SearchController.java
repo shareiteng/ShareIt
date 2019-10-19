@@ -9,7 +9,6 @@ import com.transcan.backendtranscan.payload.ApiResponse;
 import com.transcan.backendtranscan.services.RoleService;
 import com.transcan.backendtranscan.services.SearchRideService;
 import com.transcan.backendtranscan.services.UserInfoService;
-import jdk.nashorn.internal.runtime.OptimisticBuiltins;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
