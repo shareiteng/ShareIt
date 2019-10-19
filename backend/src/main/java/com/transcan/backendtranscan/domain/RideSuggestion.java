@@ -15,16 +15,15 @@ public class RideSuggestion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long suggestionId;
-    private String destinatin;
+    private String destination;
     private String location;
-    private String days;
+    private String value;
     private  String remarks;
     private String date;
     private String hours;
     private String vehicleNumber;
     private String vehicleType;
     private int seats;
-
 
     @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn

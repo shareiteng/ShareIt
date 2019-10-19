@@ -13,13 +13,12 @@ class DriveForm extends Component{
 
     this.state = {
         location:'',
-        destinatin:'', 
+        destination:'', 
         date:'',
         hours:'',
-        days:'',
         remarks:'',
         vehicleNumber: '',
-        vehicletype:'',
+        vehicleType:'',
         seat:1
       
       }
@@ -83,7 +82,7 @@ class DriveForm extends Component{
               <ToggleButtonGroup
                   type="checkbox"
                   value={this.state.value}
-                  id='days'
+                  id='value'
                   onChange={this.handleChangeTog}>
                   <ToggleButton value={1}>Su</ToggleButton>
                   <ToggleButton value={2}>Mo</ToggleButton>

@@ -1,11 +1,14 @@
 package com.transcan.backendtranscan;
 
+import com.google.maps.errors.ApiException;
+import com.transcan.backendtranscan.services.MapService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.util.TimeZone;
 
 @SpringBootApplication
@@ -19,8 +22,7 @@ public class BackendtranscanApplication {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args)  {
         SpringApplication.run(BackendtranscanApplication.class, args);
     }
 }
