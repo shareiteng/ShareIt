@@ -1,5 +1,6 @@
 package com.transcan.backendtranscan.domain;
 
+import com.google.maps.model.LatLng;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,7 +16,9 @@ public class RideSearch{
     private String location;
     private String desination;
     private String date;
-    private  String hours;
+    private String hours;
+    private String locLatLng;
+    private String desLatLng;
     @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserInfo userInfo;
