@@ -29,7 +29,7 @@ export  const searchSubmit = (query) =>
 
     
 export  const driverSubmit = (query, query1 ) =>
-axios.post(`${api}/form_submit/driversubmit`,query, query1, {
+axios.post(`${api}/form_submit/driversubmit`,query, {
   params: {
     userId: 1
   }} );

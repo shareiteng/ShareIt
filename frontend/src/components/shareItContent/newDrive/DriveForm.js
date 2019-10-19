@@ -12,20 +12,16 @@ class DriveForm extends Component{
     super()
 
     this.state = {
-      rideSuggestion:{
-        location:'das',
-        destinatin:'fw', 
-        date:'q',
-        hours:'qwee',
-        value:'eee',
-        remarks:'eee',
-      },
-      
-      vihecle:{
-        vehicleNumber: '111',
-        vehicletype:'122',
+        location:'',
+        destinatin:'', 
+        date:'',
+        hours:'',
+        days:'',
+        remarks:'',
+        vehicleNumber: '',
+        vehicletype:'',
         seat:1
-      }
+      
       }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,7 +36,7 @@ class DriveForm extends Component{
      
       handleSubmit = (e) => {
         e.preventDefault();
-        this.props.submit([this.state.rideSuggestion],[this.state.vihecle])
+        this.props.submit(this.state)
         
         console.log(this.state);
       }
@@ -62,24 +58,24 @@ class DriveForm extends Component{
                 <input type="text" id='location' onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="destination">Distination</label>
-                <input type="text" id='distination' onChange={this.handleChange} />
+                <label htmlFor="destination">Destination</label>
+                <input type="text" id='destination' onChange={this.handleChange} />
             </div>
             <div className="input-field">
                 <label htmlFor="date">Date</label>
                 <input type="datetime-local" id='date' onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="carId">Car Id</label>
-                <input type="text" id='carId' onChange={this.handleChange} />
+                <label htmlFor="vehicleNumber">Car Id</label>
+                <input type="text" id='vehicleNumber' onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="carType">car Type</label>
-                <input type="text" id='carType' onChange={this.handleChange} />
+                <label htmlFor="vehicletype">car Type</label>
+                <input type="text" id='vehicletype' onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="seatsNum">Number of seats</label>
-                <input type="text" id='seatsNum' onChange={this.handleChange} />
+                <label htmlFor="seat">Number of seats</label>
+                <input type="text" id='seat' onChange={this.handleChange} />
             </div>
             
 
@@ -87,6 +83,7 @@ class DriveForm extends Component{
               <ToggleButtonGroup
                   type="checkbox"
                   value={this.state.value}
+                  id='days'
                   onChange={this.handleChangeTog}>
                   <ToggleButton value={1}>Su</ToggleButton>
                   <ToggleButton value={2}>Mo</ToggleButton>
