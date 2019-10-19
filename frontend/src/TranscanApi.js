@@ -22,7 +22,7 @@ export  const isLogin = (query) =>
     );
 
 export  const searchSubmit = (query) =>
-    axios.post(`${api}/search_submit/searchSubmit`,query, {
+    axios.post(`${api}/search_submit/searchsubmit`,query, {
       params: {
         userId: 1
       }} );

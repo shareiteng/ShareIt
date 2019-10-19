@@ -14,7 +14,7 @@ class SearchBar extends Component{
 
     this.state = {
         location: '',
-        distination: '',
+        destination: '',
         date:'',
         hour:""
       }
