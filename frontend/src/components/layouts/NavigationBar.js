@@ -58,5 +58,6 @@ const mapStateToProps=(state) => {
 }
 
 
-export default connect(mapStateToProps )(NavigationBar)
+
+export default connect(null,mapStateToProps )(NavigationBar)
  

@@ -16,7 +16,7 @@ function App() {
   let defaultLink=SignUp;
 const a= LocalStorageService.getFromLocal("transanUserID");
 console.log(a+"  sss");
-if(a!=='loggedout'||a===null){
+if(a!=='loggedout'||a!==null){
   console.log("yes");
 defaultLink=Search;
 

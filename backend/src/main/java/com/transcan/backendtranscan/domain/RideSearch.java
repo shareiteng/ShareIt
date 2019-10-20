@@ -1,10 +1,8 @@
 package com.transcan.backendtranscan.domain;
 
-import com.google.maps.model.LatLng;
 import lombok.Data;
-
 import javax.persistence.*;
-import java.sql.Date;
+
 
 @Data
 @Entity

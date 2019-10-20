@@ -51,7 +51,7 @@ public class ResultMatchObj {
         return mVehicle;
     }
 
-    public ArrayList<ResultMatchObj> getMatchList(Iterable<RideSearch> rideSearch) {
+    public ArrayList<ResultMatchObj> getMatchList(Iterable<RideSearch> rideSearch ) {
 
         ArrayList<ResultMatchObj> arrayList = new ArrayList<ResultMatchObj>();
         for (RideSearch current : rideSearch) {
@@ -68,6 +68,16 @@ public class ResultMatchObj {
         }
         return arrayList;
     }
+
+    public ArrayList<ResultMatchObj> getDriverMatchList(Iterable<RideSearch> rideSearch ) {
+
+        ArrayList<ResultMatchObj> arrayList = new ArrayList<ResultMatchObj>();
+        for (RideSearch current : rideSearch) {
+        }
+            }
+
+
+    public void removeMatchList(ResultMatchObj resultMatchObj){};
 
 
 
