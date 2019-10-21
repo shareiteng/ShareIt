@@ -31,3 +31,9 @@ axios.post(`${api}/form_submit/suggestionsubmit`,query, {
   params: {
     userId: 1
   }} );
+
+  export  const findBestMatch =  () =>
+  axios.post(`${api}/form_submit/getbestride`,{}, {
+    params: {
+      userId: 3
+    }} );
