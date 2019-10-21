@@ -82,36 +82,33 @@ public class FormController {
 
     @PostMapping("/data")
     public void searchSubmit() {
+        String desLatLang = "11";
+        String loLatLang = "11";
+
+        for (int i = 0; i < 10; i++)
+            for (int j = 0; j < 10; i++)
+                for (int h = 0;  h < 10; i++) {
+                    desLatLang = "32.10" + j + i + h + "630,34.8" + j + i + h + "7270";
+                    loLatLang = "32.102" + j + i + h + "30,34.8" + j + i + h + "4970";
 
 
-        for (int i = 1; i < 500; i++) {
+                    System.out.println("1: " + loLatLang + "2: " + desLatLang);
+                    RideSearch rideSearch = new RideSearch();
+                    rideSearch.setDesLatLng(desLatLang);
+                    rideSearch.setLocLatLng(loLatLang);
+                    try {
 
-            String desLatLang="32.101"+i+"630,34.8"+i+"72770";
-
-            String loLatLang="32.101"+i+"630,34.8"+i+"24970";
-
-            System.out.println("1: "+loLatLang+ "2: "+desLatLang);
-            RideSearch rideSearch=new RideSearch();
-            rideSearch.setDesLatLng(desLatLang);
-            rideSearch.setLocLatLng(loLatLang);
-           try {
-
-             rideSearch.setRideSearch(MapService.convertAddressToLatLng(loLatLang), MapService.convertAddressToLatLng(desLatLang), "24.12.19", "14:00");
+                        rideSearch.setRideSearch(MapService.convertAddressToLatLng(loLatLang), MapService.convertAddressToLatLng(desLatLang), "24.12.19", "14:00");
 
 
+                        rideSearch.setUserInfo(new UserInfo("username12" + i + h + j, "sajj@dd.com12" + i + h + j, "123", "jjj", "jjj"));
 
-            rideSearch.setUserInfo(new UserInfo("username12" + i, "sajj@dd.com12" + i, "123", "jjj", "jjj"));
-            Long d = Long.valueOf(i);
+                        searchRideService.save(rideSearch);
+                    } catch (Exception e) {
+                        System.out.println("server eror" + e.getMessage());
+                    }
+                }
+    }}
 
-
-            UserInfo u = userInfoService.findById(d).orElse(null);
-            if (u != null) {
-                rideSearch.setUserInfo(u);
-            }
-            searchRideService.save(rideSearch);
-           }catch (Exception e){System.out.println("server eror"+ e.getMessage());}
-        }
-    }
-    }
 
 
