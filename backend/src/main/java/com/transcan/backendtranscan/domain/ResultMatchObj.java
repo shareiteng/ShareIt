@@ -78,6 +78,7 @@ public class ResultMatchObj {
         return arrayList;
     }
 
+
     public ResultMatchObj getDriverMatchList(Iterable<RideSearch> rideSearch, String locLatLang, String desLatLang, int seatNum, long id ) {
         int counter=0;
         ResultMatchObj resultMatchObj = new ResultMatchObj(id);
@@ -111,6 +112,8 @@ public class ResultMatchObj {
                     theBestRide = resList.get(i).getPassengerNum();
                 indexBestRide = i;
             }
+
+
 
             bestRideList.add(resultMatchObjArrayList.get(indexBestRide));
             for (long id : resultMatchObjArrayList.get(indexBestRide).getPassengerList()) {

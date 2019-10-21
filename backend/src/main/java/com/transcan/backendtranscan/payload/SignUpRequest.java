@@ -17,6 +17,14 @@ public class SignUpRequest {
     private String phone;
     private long score=0;
 
+
+    public SignUpRequest(){}
+    public SignUpRequest(String username,String email,String password){
+        this.email=email;
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }

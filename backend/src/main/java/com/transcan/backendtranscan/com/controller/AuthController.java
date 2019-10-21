@@ -102,4 +102,13 @@ public class AuthController {
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 
+
+    @PostMapping("/massivesignup")
+    public void massiveSignUp(){
+        for(int i =1;i<20;i++){
+            SignUpRequest temp = new SignUpRequest("username"+i,"user"+i+"@hotmail.com","123456789");
+            registerUser(temp);
+        }
+    }
+
 }

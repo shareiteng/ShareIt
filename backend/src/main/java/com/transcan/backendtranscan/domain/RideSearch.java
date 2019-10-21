@@ -20,5 +20,10 @@ public class RideSearch{
     @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserInfo userInfo;
-
+    public RideSearch(){}
+    public RideSearch(String location,String desination, String date, String hours){
+        this.location=location;
+        this.desination = desination;
+        this.date = date;
+    }
 }
