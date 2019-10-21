@@ -4,11 +4,10 @@ import com.transcan.backendtranscan.services.MapService;
 import com.transcan.backendtranscan.services.RideSuggestionService;
 import com.transcan.backendtranscan.services.SearchRideService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ResultMatchObj {
+
     static final int TEXI = 0;
     static final int PRIVATE_CAR = 1;
     static final int TEXI6SEAT = 2;
@@ -19,9 +18,14 @@ public class ResultMatchObj {
     private ArrayList<Long> mPassngersIdList;
     private int mVehicle;
 
+    @Autowired
+    private SearchRideService searchRideService;
+    @Autowired
+    private RideSuggestionService rideSuggestionService;
+
 
     public ResultMatchObj(long id) {
-        this.mId = id;
+        mId = id;
         mPassngersIdList = new ArrayList();
         mVehicle = TEXI;
     }
@@ -38,7 +42,7 @@ public class ResultMatchObj {
         return mPassngersIdList;
     }
 
-    public int VehicleType() {
+    public int getVehicleType() {
         if (getPassengerNum() <= 4)
             mVehicle = TEXI;
         else if (getPassengerNum() <= 8)
@@ -50,6 +54,11 @@ public class ResultMatchObj {
 
         return mVehicle;
     }
+
+    public void setmVehicle(int vehicle){
+    mVehicle=vehicle;
+    }
+
 
     public ArrayList<ResultMatchObj> getMatchList(Iterable<RideSearch> rideSearch ) {
 
@@ -69,15 +78,52 @@ public class ResultMatchObj {
         return arrayList;
     }
 
-    public ArrayList<ResultMatchObj> getDriverMatchList(Iterable<RideSearch> rideSearch ) {
+    public ResultMatchObj getDriverMatchList(Iterable<RideSearch> rideSearch, String locLatLang, String desLatLang, int seatNum, long id ) {
+        int counter=0;
+        ResultMatchObj resultMatchObj = new ResultMatchObj(id);
+        resultMatchObj.setmVehicle(PRIVATE_CAR);
+        for (RideSearch passenger : rideSearch) {
+                    if(MapService.getDistanceGeoLocation(desLatLang, passenger.getDesLatLng()) <= 500 &&
+                         MapService.getDistanceGeoLocation(locLatLang, passenger.getLocLatLng()) <= 500 &&
+                         seatNum>=counter) {
+                            counter++;
+                            resultMatchObj.addNewPassanger(passenger.getSearchId());
+                            resultMatchObj.searchRideService.delete(passenger);
+            }
+            }
+        rideSuggestionService.delete(rideSuggestionService.findById(id).orElse(null));
+        return  resultMatchObj;
 
-        ArrayList<ResultMatchObj> arrayList = new ArrayList<ResultMatchObj>();
-        for (RideSearch current : rideSearch) {
-        }
+    }
+
+
+    public ArrayList<ResultMatchObj> getMatchObjList(ArrayList<ResultMatchObj > resultMatchObjArrayList, Iterable<RideSearch> rideSearch){
+        ArrayList<ResultMatchObj> bestRideList= new ArrayList<>();
+        ArrayList<ResultMatchObj> resList=resultMatchObjArrayList;
+
+        while (resultMatchObjArrayList.size() > 0) {
+
+
+            int theBestRide = 0;
+            int indexBestRide = 0;
+            for (int i = 0; i < resList.size(); i++) {
+                if (resList.get(i).getPassengerNum() > theBestRide)
+                    theBestRide = resList.get(i).getPassengerNum();
+                indexBestRide = i;
             }
 
+            bestRideList.add(resultMatchObjArrayList.get(indexBestRide));
+            for (long id : resultMatchObjArrayList.get(indexBestRide).getPassengerList()) {
+                searchRideService.delete(searchRideService.findById(id).orElse(null));
+            }
+            searchRideService.delete(searchRideService.findById(resList.get(indexBestRide).mId).orElse(null));
+            resList.remove(indexBestRide);
+        }
 
-    public void removeMatchList(ResultMatchObj resultMatchObj){};
+        return  bestRideList;
+
+
+    }
 
 
 

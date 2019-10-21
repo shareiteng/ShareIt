@@ -9,7 +9,7 @@ class SubscriptionDetails extends Component{
         <Accordion className="accord" defaultActiveKey="0" >
             <Card>
                 <Accordion.Toggle as={Card.Header} eventKey="0">
-                My Subscription 
+                My Subscription* 
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
                 <Card.Body>
@@ -53,7 +53,16 @@ class SubscriptionDetails extends Component{
             <Button variant="secondary" size="lg" block href='/new_drive'>
                 Add New Drive
             </Button>
+
+            <Button variant="secondary" size="lg" block href='/new_drive'>
+                Find me the best ride
+            </Button> 
+           
+            <Button variant="secondary" size="lg" block href='/new_drive'>
+                Display All the best match
+            </Button>
             </Accordion>
+            
 
     )
 }

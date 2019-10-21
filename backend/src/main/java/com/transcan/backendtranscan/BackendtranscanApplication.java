@@ -22,7 +22,11 @@ public class BackendtranscanApplication {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws InterruptedException, ApiException, IOException {
         SpringApplication.run(BackendtranscanApplication.class, args);
+        System.out.println(MapService.getGeolocation("מאיר שפיה 9, פתח תקווה"));
+        System.out.println(MapService.convertAddressToLatLng("32.10164030,34.87328770"));
+        System.out.println(MapService.convertAddressToLatLng("32.10194030,34.87388770"));
+        System.out.println(MapService.getDistanceGeoLocation("32.10164030,34.87328770","32.10194030,34.87388770"));
     }
 }

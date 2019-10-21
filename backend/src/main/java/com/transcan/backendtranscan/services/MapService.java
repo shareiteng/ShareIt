@@ -27,6 +27,17 @@ public class MapService {
         return (results[0].geometry.location.toString());
     }
 
+    public static String convertAddressToLatLng(String latLng) throws InterruptedException, ApiException, IOException {
+        GeoApiContext context = new GeoApiContext.Builder()
+                .apiKey("AIzaSyDCv8LRiSPWaEvGcRELhW1dOnbEYn92a0A")
+                .build();
+        GeocodingResult[] results = GeocodingApi.geocode(context,
+                latLng).await();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return (results[0].formattedAddress);
+    }
+
+
     public static float getDistanceGeoLocation(String latLng1, String latLng2) {
 
         double earthRadius = 6371000; //meters
