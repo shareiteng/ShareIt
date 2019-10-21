@@ -55,7 +55,7 @@ public class ResultMatchObj {
 
 
     public ArrayList<ResultMatchObj> getMatchList(Iterable<RideSearch> rideSearch ) {
-
+        int index=0;
         ArrayList<ResultMatchObj> arrayList = new ArrayList<ResultMatchObj>();
         for (RideSearch current : rideSearch) {
             arrayList.add(new ResultMatchObj(current.getSearchId()));
@@ -63,7 +63,7 @@ public class ResultMatchObj {
                 if (current.getSearchId() != passanger.getSearchId()) {
                     if (MapService.getDistanceGeoLocation(current.getDesLatLng(), passanger.getDesLatLng()) <= 500 &&
                             MapService.getDistanceGeoLocation(current.getLocLatLng(), passanger.getLocLatLng()) <= 500) {
-                        arrayList.get(arrayList.size() - 1).addNewPassanger(passanger.getSearchId());
+                        arrayList.get(index).addNewPassanger(passanger.getSearchId());
                     }
                 }
             }
@@ -105,8 +105,10 @@ public class ResultMatchObj {
                 indexBestRide = i;
             }
             bestRideList.add(resList.get(indexBestRide));
+
             for (Long id : resList.get(indexBestRide).getPassengerList()) {
                     searchRideService.deleteById(id);
+
             }
             searchRideService.deleteById(resList.get(indexBestRide).mId);
 
