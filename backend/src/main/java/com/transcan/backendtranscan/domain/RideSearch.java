@@ -26,4 +26,10 @@ public class RideSearch{
         this.destination = desination;
         this.date = date;
     }
+    public void setRideSearch(String location,String desination, String date, String hours){
+        this.location=location;
+        this.destination = desination;
+        this.date = date;
+        this.hours=hours;
+    }
 }

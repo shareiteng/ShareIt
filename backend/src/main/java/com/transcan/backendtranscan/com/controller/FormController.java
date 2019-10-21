@@ -36,8 +36,8 @@ public class FormController {
         try {
             rideSearch.setHours(rideSearch.getDate().substring(11));
             rideSearch.setDate(rideSearch.getDate().substring(0,10));
-            rideSearch.setLocLatLng(MapService.getGeolocation(rideSearch.getLocation()).toString());
-            rideSearch.setDesLatLng(MapService.getGeolocation(rideSearch.getDestination()).toString());
+            rideSearch.setLocLatLng(MapService.getGeolocation(rideSearch.getLocation()));
+            rideSearch.setDesLatLng(MapService.getGeolocation(rideSearch.getDestination()));
             UserInfo u = userInfoService.findById(userId).orElse(null);
             if (u != null) {
                 rideSearch.setUserInfo(u);
@@ -79,5 +79,39 @@ public class FormController {
         return new ResponseEntity(new ApiResponse(false, "something went wrong please try again"),
                 HttpStatus.BAD_REQUEST);
     }
-}
+
+    @PostMapping("/data")
+    public void searchSubmit() {
+
+
+        for (int i = 1; i < 500; i++) {
+
+            String desLatLang="32.101"+i+"630,34.8"+i+"72770";
+
+            String loLatLang="32.101"+i+"630,34.8"+i+"24970";
+
+            System.out.println("1: "+loLatLang+ "2: "+desLatLang);
+            RideSearch rideSearch=new RideSearch();
+            rideSearch.setDesLatLng(desLatLang);
+            rideSearch.setLocLatLng(loLatLang);
+           try {
+
+             rideSearch.setRideSearch(MapService.convertAddressToLatLng(loLatLang), MapService.convertAddressToLatLng(desLatLang), "24.12.19", "14:00");
+
+
+
+            rideSearch.setUserInfo(new UserInfo("username12" + i, "sajj@dd.com12" + i, "123", "jjj", "jjj"));
+            Long d = Long.valueOf(i);
+
+
+            UserInfo u = userInfoService.findById(d).orElse(null);
+            if (u != null) {
+                rideSearch.setUserInfo(u);
+            }
+            searchRideService.save(rideSearch);
+           }catch (Exception e){System.out.println("server eror"+ e.getMessage());}
+        }
+    }
+    }
+
 

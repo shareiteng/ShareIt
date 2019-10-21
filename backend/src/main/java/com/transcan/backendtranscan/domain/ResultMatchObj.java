@@ -55,7 +55,7 @@ public class ResultMatchObj {
         return mVehicle;
     }
 
-    public void setmVehicle(int vehicle){
+    public void setVehicle(int vehicle){
     mVehicle=vehicle;
     }
 
@@ -82,7 +82,7 @@ public class ResultMatchObj {
     public ResultMatchObj getDriverMatchList(Iterable<RideSearch> rideSearch, String locLatLang, String desLatLang, int seatNum, long id ) {
         int counter=0;
         ResultMatchObj resultMatchObj = new ResultMatchObj(id);
-        resultMatchObj.setmVehicle(PRIVATE_CAR);
+        resultMatchObj.setVehicle(PRIVATE_CAR);
         for (RideSearch passenger : rideSearch) {
                     if(MapService.getDistanceGeoLocation(desLatLang, passenger.getDesLatLng()) <= 500 &&
                          MapService.getDistanceGeoLocation(locLatLang, passenger.getLocLatLng()) <= 500 &&
