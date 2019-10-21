@@ -17,7 +17,7 @@ public class RideSearch{
     private String hours;
     private String locLatLng;
     private String desLatLng;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @PrimaryKeyJoinColumn
     private UserInfo userInfo;
     public RideSearch(){}

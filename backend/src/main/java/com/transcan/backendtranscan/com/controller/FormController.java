@@ -119,7 +119,7 @@ public class FormController {
         ResultMatchObj obj = new ResultMatchObj(userId);
         Iterable<RideSearch> entities =searchRideService.findAll();
         ArrayList<ResultMatchObj> result = obj.getMatchList(entities);
-        return obj.getMatchObjList(result,entities);
+        return obj.getMatchObjList(result,searchRideService);
     }
 
     @PostMapping("/getid")
@@ -138,6 +138,10 @@ public class FormController {
         }
     }
 
+    @PostMapping("/delete")
+    public void dele(@Valid @RequestParam Long userId){
+        searchRideService.deleteById(userId);
+    }
 }
 
 

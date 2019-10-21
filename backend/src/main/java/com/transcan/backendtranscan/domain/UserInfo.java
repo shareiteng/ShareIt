@@ -45,10 +45,10 @@ public class UserInfo extends DateAudit {
 
     private long score;
 
-    @OneToMany(cascade = CascadeType.ALL ,mappedBy = "userInfo")
+    @OneToMany(cascade = CascadeType.PERSIST ,mappedBy = "userInfo")
     private Set<RideSuggestion> rideSuggestion = new HashSet<RideSuggestion>(0);
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private Set<RideSearch> rideSearch = new HashSet<RideSearch>(0);
 
 
