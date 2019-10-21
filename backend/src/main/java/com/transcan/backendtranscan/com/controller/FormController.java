@@ -1,5 +1,6 @@
 package com.transcan.backendtranscan.com.controller;
 
+import com.transcan.backendtranscan.domain.ResultMatchObj;
 import com.transcan.backendtranscan.domain.RideSearch;
 import com.transcan.backendtranscan.domain.RideSuggestion;
 import com.transcan.backendtranscan.domain.UserInfo;
@@ -16,7 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
-
+import java.util.ArrayList;
+import java.util.Map;
 
 
 @RestController
@@ -48,7 +50,7 @@ public class FormController {
                 return ResponseEntity.created(location).body(new ApiResponse(true, "ride search registered successfully"+ rideSearch.getDate()+"aaaaa"+rideSearch.getHours()));
             }
         } catch (Exception e) {
-            return new ResponseEntity(new ApiResponse(false, "user does not exist!"),
+            return new ResponseEntity(new ApiResponse(false, "user does not exist!     " +e.toString()),
                     HttpStatus.BAD_REQUEST);
 
         }
@@ -85,9 +87,9 @@ public class FormController {
         String desLatLang = "11";
         String loLatLang = "11";
 
-        for (int i = 0; i < 10; i++)
-            for (int j = 0; j < 10; i++)
-                for (int h = 0;  h < 10; i++) {
+        for (int i = 0; i < 9; i++)
+            for (int j = 0; j < 9; j++)
+                for (int h = 0;  h< 9; h++) {
                     desLatLang = "32.10" + j + i + h + "630,34.8" + j + i + h + "7270";
                     loLatLang = "32.102" + j + i + h + "30,34.8" + j + i + h + "4970";
 
@@ -108,7 +110,34 @@ public class FormController {
                         System.out.println("server eror" + e.getMessage());
                     }
                 }
-    }}
+    }
 
+
+
+        @PostMapping("/getbestride")
+    public ArrayList<ResultMatchObj> getBestRide(@Valid @RequestParam Long userId) {
+        ResultMatchObj obj = new ResultMatchObj(userId);
+        Iterable<RideSearch> entities =searchRideService.findAll();
+        ArrayList<ResultMatchObj> result = obj.getMatchList(entities);
+        return obj.getMatchObjList(result,entities);
+    }
+
+    @PostMapping("/getid")
+    public ArrayList<ResultMatchObj>  getUser(@Valid @RequestParam  Long userId){
+        ResultMatchObj obj = new ResultMatchObj(userId);
+        Iterable<RideSearch> entities =searchRideService.findAll();
+        return obj.getMatchList(entities);
+    }
+
+    @PostMapping("/getstreet")
+    public String  getUser(@Valid @RequestParam String lat){
+        try{
+            return MapService.convertAddressToLatLng(lat);
+        }catch (Exception e){
+            return "";
+        }
+    }
+
+}
 
 

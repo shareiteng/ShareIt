@@ -64,9 +64,9 @@ public class ResultMatchObj {
 
         ArrayList<ResultMatchObj> arrayList = new ArrayList<ResultMatchObj>();
         for (RideSearch current : rideSearch) {
+            arrayList.add(new ResultMatchObj(current.getSearchId()));
             for (RideSearch passanger : rideSearch) {
                 if (current.getSearchId() != passanger.getSearchId()) {
-                    arrayList.add(new ResultMatchObj(current.getSearchId()));
                     if (MapService.getDistanceGeoLocation(current.getDesLatLng(), passanger.getDesLatLng()) <= 500 &&
                             MapService.getDistanceGeoLocation(current.getLocLatLng(), passanger.getLocLatLng()) <= 500) {
                         arrayList.get(arrayList.size() - 1).addNewPassanger(passanger.getSearchId());
