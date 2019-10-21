@@ -4,9 +4,11 @@ package com.transcan.backendtranscan.payload;
 public class JwtAuthenticationResponse {
     private String accessToken;
     private String tokenType = "Bearer";
+    private Long id;
 
-    public JwtAuthenticationResponse(String accessToken) {
+    public JwtAuthenticationResponse(String accessToken,Long id) {
         this.accessToken = accessToken;
+        this.id = id;
     }
     public String getAccessToken() {
         return accessToken;
@@ -22,5 +24,13 @@ public class JwtAuthenticationResponse {
 
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
