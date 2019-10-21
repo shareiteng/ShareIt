@@ -12,7 +12,7 @@ public class RideSearch{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long searchId;
     private String location;
-    private String desination;
+    private String destination;
     private String date;
     private String hours;
     private String locLatLng;
@@ -23,7 +23,7 @@ public class RideSearch{
     public RideSearch(){}
     public RideSearch(String location,String desination, String date, String hours){
         this.location=location;
-        this.desination = desination;
+        this.destination = desination;
         this.date = date;
     }
 }

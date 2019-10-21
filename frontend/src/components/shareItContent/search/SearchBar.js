@@ -14,7 +14,7 @@ class SearchBar extends Component{
 
     this.state = {
         location: '',
-        desination: '',
+        destination: '',
         date:'',
         hours:'',
         locLatLng:'',
@@ -51,7 +51,7 @@ class SearchBar extends Component{
                 </Form.Group>
                </Col>
                <Col >
-                 <Form.Group controlId="desination" >
+                 <Form.Group controlId="destination" >
                   <Form.Label>From</Form.Label>
                   <Form.Control as="textarea" rows="1" onChange={this.handleChange}/>
                 </Form.Group>

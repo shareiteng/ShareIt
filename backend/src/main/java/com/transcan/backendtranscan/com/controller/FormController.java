@@ -37,7 +37,7 @@ public class FormController {
             rideSearch.setHours(rideSearch.getDate().substring(11));
             rideSearch.setDate(rideSearch.getDate().substring(0,10));
             rideSearch.setLocLatLng(MapService.getGeolocation(rideSearch.getLocation()).toString());
-            rideSearch.setDesLatLng(MapService.getGeolocation(rideSearch.getDesination()).toString());
+            rideSearch.setDesLatLng(MapService.getGeolocation(rideSearch.getDestination()).toString());
             UserInfo u = userInfoService.findById(userId).orElse(null);
             if (u != null) {
                 rideSearch.setUserInfo(u);
