@@ -61,7 +61,7 @@ public class MapService {
         return Double.parseDouble(latLng.substring(0, 11));
     }
 
-    public String getMiddlePoint(ArrayList<Long> idList, boolean isLocationPoint) {
+    public static String getMiddlePoint(ArrayList<Long> idList, boolean isLocationPoint,SearchRideService searchRideService) {
         double latSum = 0;
         double lngSum = 0;
 

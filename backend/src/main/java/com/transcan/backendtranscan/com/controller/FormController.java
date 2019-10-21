@@ -114,7 +114,7 @@ public class FormController {
 
 
 
-        @PostMapping("/getbestride")
+    @PostMapping("/getbestride")
     public ArrayList<ResultMatchObj> getBestRide(@Valid @RequestParam Long userId) {
         ResultMatchObj obj = new ResultMatchObj(userId);
         Iterable<RideSearch> entities =searchRideService.findAll();

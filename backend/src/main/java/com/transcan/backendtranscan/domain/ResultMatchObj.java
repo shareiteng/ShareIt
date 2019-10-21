@@ -17,6 +17,48 @@ public class ResultMatchObj {
     private long mId;
     private ArrayList<Long> mPassngersIdList;
     private int mVehicle;
+    private String avargeLatDes;
+    private String AvargeLatloc;
+
+    public ArrayList<Long> getmPassngersIdList() {
+        return mPassngersIdList;
+    }
+
+    public void setmPassngersIdList(ArrayList<Long> mPassngersIdList) {
+        this.mPassngersIdList = mPassngersIdList;
+    }
+
+    public int getmVehicle() {
+        return mVehicle;
+    }
+
+    public void setmVehicle(int mVehicle) {
+        this.mVehicle = mVehicle;
+    }
+
+    public long getmId() {
+        return mId;
+    }
+
+    public void setmId(long mId) {
+        this.mId = mId;
+    }
+
+    public String getAvargeLatDes() {
+        return avargeLatDes;
+    }
+
+    public void setAvargeLatDes(String avargeLatDes) {
+        this.avargeLatDes = avargeLatDes;
+    }
+
+    public String getAvargeLatloc() {
+        return AvargeLatloc;
+    }
+
+    public void setAvargeLatloc(String avargeLatloc) {
+        AvargeLatloc = avargeLatloc;
+    }
 
     public ResultMatchObj(long id) {
         mId = id;
@@ -105,6 +147,10 @@ public class ResultMatchObj {
                 indexBestRide = i;
             }
             bestRideList.add(resList.get(indexBestRide));
+
+            ArrayList<Long> temp = resList.get(indexBestRide).getPassengerList();
+            resList.get(indexBestRide).setAvargeLatloc(MapService.getMiddlePoint(temp,true,searchRideService));
+            resList.get(indexBestRide).setAvargeLatDes(MapService.getMiddlePoint(temp,false,searchRideService));
             for (Long id : resList.get(indexBestRide).getPassengerList()) {
                     searchRideService.deleteById(id);
             }
