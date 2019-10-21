@@ -1,4 +1,3 @@
-
 import {login} from '../../TranscanApi'
 import {addNewUser} from '../../TranscanApi'
 import LocalStorageService from '../../LocalStorageService';
@@ -67,5 +66,3 @@ export const signUp = (newUser) => {
         }
     });
       }}
-    
-    

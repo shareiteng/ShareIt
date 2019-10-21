@@ -1,5 +1,4 @@
 import axios from "axios";
-import localStorageService from './LocalStorageService'
 
 const api = "http://localhost:5000/api"
 
@@ -13,24 +12,22 @@ export const addNewUser = (query) =>
   axios.post(`${api}/auth/signup`, query);
 
 export  const login = (query) =>
-
   axios.post(`${api}/auth/signin`,query  
     );
 
 export  const isLogin = (query) =>
-  axios.post(`${api}/auth/signin`,query  
+   axios.post(`${api}/auth/islogin`,query  
     );
 
-export  const searchSubmit = (query) =>
+    export  const searchSubmit = (query) =>
     axios.post(`${api}/form_submit/searchsubmit`,query, {
       params: {
         userId: 2
       }} );
 
     
-export  const driverSubmit = (query, query1 ) =>
+export  const driverSubmit = (query ) =>
 axios.post(`${api}/form_submit/suggestionsubmit`,query, {
   params: {
     userId: 1
   }} );
-

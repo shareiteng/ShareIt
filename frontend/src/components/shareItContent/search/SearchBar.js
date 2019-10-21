@@ -14,9 +14,11 @@ class SearchBar extends Component{
 
     this.state = {
         location: '',
-        destination: '',
+        desination: '',
         date:'',
-        hour:""
+        hours:'',
+        locLatLng:'',
+        desLatLng:''
       }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,7 +51,7 @@ class SearchBar extends Component{
                 </Form.Group>
                </Col>
                <Col >
-                 <Form.Group controlId="distination" >
+                 <Form.Group controlId="desination" >
                   <Form.Label>From</Form.Label>
                   <Form.Control as="textarea" rows="1" onChange={this.handleChange}/>
                 </Form.Group>

@@ -18,7 +18,7 @@ public class RideSuggestion {
     private String destination;
     private String location;
     private String value;
-    private  String remarks;
+    private String remarks;
     private String date;
     private String hours;
     private String vehicleNumber;

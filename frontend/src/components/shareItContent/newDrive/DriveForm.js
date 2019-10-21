@@ -19,7 +19,8 @@ class DriveForm extends Component{
         remarks:'',
         vehicleNumber: '',
         vehicleType:'',
-        seat:1
+        seat:1,
+        value:''
       
       }
     this.handleChange = this.handleChange.bind(this);
