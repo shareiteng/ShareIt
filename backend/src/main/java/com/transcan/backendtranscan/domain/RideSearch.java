@@ -13,7 +13,7 @@ public class RideSearch{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long searchId;
     private String location;
-    private String desination;
+    private String destination;
     private String date;
     private  String hours;
     @ManyToOne(cascade = CascadeType.ALL)
