@@ -78,16 +78,5 @@ public class FormController {
         return new ResponseEntity(new ApiResponse(false, "something went wrong please try again"),
                 HttpStatus.BAD_REQUEST);
     }
-    @PostMapping("/massivesearchsubmit")
-    public void massiveSearchSubmit() {
-        for(int i =1;i<5;i++){
-            RideSearch temp = new RideSearch("location"+i,"destenaition"+i,"2019-01-02T00:03","3");
-                searchSubmit(temp,(long)i);
-        }
-    }
-
-
-
-
-    }
+}
 
