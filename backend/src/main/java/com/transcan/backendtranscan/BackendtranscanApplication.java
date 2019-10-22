@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 import javax.annotation.PostConstruct;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.util.TimeZone;
 
 @SpringBootApplication
+
 @EntityScan(basePackageClasses = {
         BackendtranscanApplication.class,
         Jsr310JpaConverters.class

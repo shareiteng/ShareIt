@@ -20,7 +20,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Map;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/form_submit")
 public class FormController {
