@@ -4,7 +4,7 @@ import  Accordion from 'react-bootstrap/Accordion'
 import  Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {findBestMatch} from '../../TranscanApi'
-
+import Modala from './Modal'
 class SubscriptionDetails extends Component{
 
 
@@ -65,9 +65,7 @@ class SubscriptionDetails extends Component{
                 Add New Drive
             </Button>
 
-            <Button  onClick={this.findBestMatch}  type="button" variant="secondary" size="lg" block >}
-                Find me the best ride
-            </Button> 
+            <Modala/>
            
             <Button variant="secondary" size="lg" block href='/new_drive'>
                 Display All the best match
