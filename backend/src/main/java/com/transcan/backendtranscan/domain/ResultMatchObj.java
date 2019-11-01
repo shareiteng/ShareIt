@@ -1,10 +1,18 @@
 package com.transcan.backendtranscan.domain;
 
 import com.transcan.backendtranscan.services.MapService;
+import com.transcan.backendtranscan.services.MatchService;
 import com.transcan.backendtranscan.services.RideSuggestionService;
 import com.transcan.backendtranscan.services.SearchRideService;
-import org.springframework.beans.factory.annotation.Autowired;
+import sun.util.calendar.BaseCalendar;
+
+import javax.xml.crypto.Data;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class ResultMatchObj {
 
@@ -137,6 +145,7 @@ public class ResultMatchObj {
     public ArrayList<ResultMatchObj> getMatchObjList(ArrayList<ResultMatchObj > resultMatchObjArrayList, SearchRideService searchRideService){
         ArrayList<ResultMatchObj> bestRideList= new ArrayList<>();
         ArrayList<ResultMatchObj> resList=resultMatchObjArrayList;
+        ArrayList<RideSearch> tempDB= new ArrayList<>();
 
         while (resList.size() > 0) {
             int theBestRide = 0;
@@ -152,21 +161,36 @@ public class ResultMatchObj {
             resList.get(indexBestRide).setAvargeLatloc(MapService.getMiddlePoint(temp,true,searchRideService));
             resList.get(indexBestRide).setAvargeLatDes(MapService.getMiddlePoint(temp,false,searchRideService));
             for (Long id : resList.get(indexBestRide).getPassengerList()) {
+                   tempDB.add(searchRideService.findById(id).orElse(null));
                     searchRideService.deleteById(id);
             }
+            tempDB.add(searchRideService.findById(resList.get(indexBestRide).mId).orElse(null));
             searchRideService.deleteById(resList.get(indexBestRide).mId);
 
             resList.remove(indexBestRide);
             resList = this.getMatchList(searchRideService.findAll());
         }
+
+            searchRideService.saveAll(tempDB);
         return  bestRideList;
+    }
+
+    public void deleteOldRides (SearchRideService searchRideService, MatchService matchService) {
+
+        for (RideSearch row : searchRideService.findAll()) {
+
+            LocalDate inputDate = LocalDate.parse(row.getDate());
+            LocalDateTime a=LocalDateTime.parse(row.getHours());
+            if(inputDate.isEqual(LocalDate.now())&& LocalDateTime.now().isAfter(a.minusMinutes(15)));
+            matchService.save(row);
+            searchRideService.delete(row);
+
+
+
+        }
 
 
     }
-
-
-
-
 
 }
 

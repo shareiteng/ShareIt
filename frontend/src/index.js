@@ -7,7 +7,6 @@ import authReducers from './store/reducers/authReducers'
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-import SearchReducers from './store/reducers/SearchReducers'
 import {loggedCheck} from './store/actions/AuthActions'
 
 const store = createStore(authReducers, applyMiddleware(thunkMiddleware))

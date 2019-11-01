@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.TimerTask;
 
 @CrossOrigin
 @RestController
@@ -122,6 +123,7 @@ public class FormController {
         return obj.getMatchObjList(result,searchRideService);
     }
 
+
     @PostMapping("/getid")
     public ArrayList<ResultMatchObj>  getUser(@Valid @RequestParam  Long userId){
         ResultMatchObj obj = new ResultMatchObj(userId);
@@ -139,7 +141,12 @@ public class FormController {
     }
 
     @PostMapping("/delete")
-    public void dele(@Valid @RequestParam Long userId){
+    public void delete(@Valid @RequestParam Long userId){
         searchRideService.deleteById(userId);
     }
 }
+
+class timeCheck extends TimerTask {
+   public void run() {
+   //     for(SearchRideService i: )
+    }}

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @SpringBootApplication
 
@@ -41,8 +43,13 @@ public class BackendtranscanApplication {
         System.out.println(MapService.convertAddressToLatLng("32.10164030,34.87328770"));
         System.out.println(MapService.convertAddressToLatLng("32.10194030,34.87388770"));
         System.out.println(MapService.getDistanceGeoLocation("32.10164030,34.87328770","32.10194030,34.87388770"));
+        Timer timer = new Timer();
+        timer.schedule(new timeCheck(), 0, 60000);
+
 
 
 
     }
 }
+
+

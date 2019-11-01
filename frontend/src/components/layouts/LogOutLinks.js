@@ -26,8 +26,8 @@ class LogOutLinks extends Component{
     render(){
         return(
             
-            <div> 
-            <ul className="right">
+   <div> 
+     <ul className="right">
         <li><NavLink href="#" onClick={this.handleShow}>LogIn</NavLink>  </li>
         <li><NavLink href="#join" >SignUp</NavLink></li>
       </ul>
@@ -40,10 +40,10 @@ class LogOutLinks extends Component{
                     <Modal.Body>
                         <SignIn/>
                     </Modal.Body>
-                    
+                  
                 </Modal>
                 
-                </div>
+    </div>
                 )
             }
 }

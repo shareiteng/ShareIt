@@ -12,6 +12,9 @@ class SubscriptionDetails extends Component{
    findBestMatch = () => {
        findBestMatch().then(response => {
            console.log(response);
+           this.setState({
+            data: result.data.avargeLatloc,
+         
 
        });
     }
