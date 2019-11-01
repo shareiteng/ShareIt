@@ -1,4 +1,4 @@
-package com.transcan.backendtranscan.domain.audit;
+package com.transcan.backendtranscan.domain;
 
 import com.transcan.backendtranscan.domain.UserInfo;
 import lombok.Data;
