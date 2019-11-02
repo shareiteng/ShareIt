@@ -4,7 +4,7 @@ import com.transcan.backendtranscan.services.MapService;
 import com.transcan.backendtranscan.services.MatchService;
 import com.transcan.backendtranscan.services.RideSuggestionService;
 import com.transcan.backendtranscan.services.SearchRideService;
-import sun.util.calendar.BaseCalendar;
+
 
 import javax.xml.crypto.Data;
 import java.time.LocalDate;
@@ -185,13 +185,25 @@ public class ResultMatchObj {
             matchService.save(row);
             searchRideService.delete(row);
 
-
-
         }
 
 
     }
 
-}
+    public  ResultMatchObj findTheBestRideByUserId  (SearchRideService searchRideService, ArrayList<ResultMatchObj> rideList, long userId) {
+     //   searchRideService.//(userId);
+        for (ResultMatchObj ride : rideList) {
+            for (RideSearch rideSearch : searchRideService.findUserID(userId)) {
+                if (ride.getPassengerList().contains(rideSearch.getSearchId()) || ride.mId == userId)
+                    return ride;
+            }
+        }
+
+            return new ResultMatchObj(-1);
+        }
+
+
+    }
+
 
 

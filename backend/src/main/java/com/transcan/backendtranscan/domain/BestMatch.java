@@ -14,8 +14,8 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="match")
-public class Match {
+@Table(name="bestmatch")
+public class BestMatch {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long searchId;
@@ -25,13 +25,13 @@ public class Match {
     private String hours;
     private String locLatLng;
     private String desLatLng;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserInfo userInfo;
 
 
-    public Match(){}
-    public Match(String location,String desination, String date, String hours){
+    public BestMatch(){}
+    public BestMatch(String location, String desination, String date, String hours){
         this.location=location;
         this.destination = desination;
         this.date = date;

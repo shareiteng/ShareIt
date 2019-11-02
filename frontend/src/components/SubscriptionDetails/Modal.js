@@ -28,16 +28,16 @@ class Modala extends Component{
         
         return (
             <>
-                <Button  onClick={this.handleShow}  type="button" variant="secondary" size="lg" block >}
-                    Find me the best ride
-                </Button> 
-                
+                <Button  onClick={this.handleShow}  type="button" variant="secondary" size="lg" block >
+                    Status
+                </Button>           
 
                 <Modal
                     show={this.state.show} 
                     onHide={this.handleClose}
-                    dialogClassName="modal-90w"
-                    aria-labelledby="example-custom-modal-styling-title"
+                    size="lg"
+                     aria-labelledby="contained-modal-title-vcenter"
+                   centered
                 >
                 <Modal.Header closeButton>
                     <Modal.Title id="example-custom-modal-styling-title">

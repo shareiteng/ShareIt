@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 import java.util.TimerTask;
 
@@ -114,13 +115,20 @@ public class FormController {
     }
 
 
+    @PostMapping("/getabc")
+    public ArrayList<RideSearch> aaa(Long id){
+        return searchRideService.findUserID(id);
+    }
 
     @PostMapping("/getbestride")
-    public ArrayList<ResultMatchObj> getBestRide(@Valid @RequestParam Long userId) {
+    public ResultMatchObj getBestRide(@Valid @RequestParam Long userId) {
         ResultMatchObj obj = new ResultMatchObj(userId);
         Iterable<RideSearch> entities =searchRideService.findAll();
         ArrayList<ResultMatchObj> result = obj.getMatchList(entities);
-        return obj.getMatchObjList(result,searchRideService);
+       // obj.findTheBestRideByUserId(result, userId);
+
+        ArrayList<ResultMatchObj> result1= obj.getMatchObjList(result,searchRideService);
+        return obj.findTheBestRideByUserId(searchRideService,result1,userId);
     }
 
 
