@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 
@@ -26,6 +27,7 @@ import java.util.TimerTask;
         BackendtranscanApplication.class,
         Jsr310JpaConverters.class
 })
+@EnableScheduling
 public class BackendtranscanApplication {
     @PostConstruct
     void init() {
@@ -43,8 +45,7 @@ public class BackendtranscanApplication {
         System.out.println(MapService.convertAddressToLatLng("32.10164030,34.87328770"));
         System.out.println(MapService.convertAddressToLatLng("32.10194030,34.87388770"));
         System.out.println(MapService.getDistanceGeoLocation("32.10164030,34.87328770","32.10194030,34.87388770"));
-        Timer timer = new Timer();
-        timer.schedule(new timeCheck(), 0, 60000);
+
 
 
 

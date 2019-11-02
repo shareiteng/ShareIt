@@ -8,30 +8,26 @@ import javax.persistence.*;
 import javax.persistence.*;
 
 
-
-
-
-
 @Data
 @Entity
-@Table(name="match")
-public class Match {
+@Table(name="matchtable")
+public class MatchTable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long searchId;
+    private Long searchId;
     private String location;
     private String destination;
     private String date;
     private String hours;
     private String locLatLng;
     private String desLatLng;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserInfo userInfo;
 
 
-    public Match(){}
-    public Match(String location,String desination, String date, String hours){
+    public MatchTable(){}
+    public MatchTable(String location, String desination, String date, String hours){
         this.location=location;
         this.destination = desination;
         this.date = date;
