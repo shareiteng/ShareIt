@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface SearchRideService extends JpaRepository<RideSearch,Long> {
    //Optional<ArrayList<RideSearch>> findByUser_info_id(long user_info_Id);
-   @Query(value = "SELECT * FROM ride_search u WHERE u.UserInfo.id = :user  ",
+   @Query(value = "SELECT * FROM ride_search u WHERE u.user_info_id = :user",
            nativeQuery = true)
    ArrayList<RideSearch> findUserID(@Param("user") Long user);
 
