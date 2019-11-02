@@ -145,8 +145,3 @@ public class FormController {
         searchRideService.deleteById(userId);
     }
 }
-
-class timeCheck extends TimerTask {
-   public void run() {
-   //     for(SearchRideService i: )
-    }}
