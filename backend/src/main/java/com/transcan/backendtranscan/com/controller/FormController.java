@@ -1,5 +1,6 @@
 package com.transcan.backendtranscan.com.controller;
 
+import com.google.maps.errors.ApiException;
 import com.transcan.backendtranscan.domain.ResultMatchObj;
 import com.transcan.backendtranscan.domain.RideSearch;
 import com.transcan.backendtranscan.domain.RideSuggestion;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -121,16 +123,13 @@ public class FormController {
     }
 
     @PostMapping("/getbestride")
-    public ResultMatchObj getBestRide(@Valid @RequestParam Long userId) {
+    public ArrayList<ResultMatchObj> getBestRide(@Valid @RequestParam Long userId) throws InterruptedException, ApiException, IOException {
         ResultMatchObj obj = new ResultMatchObj(userId);
-        obj.setLocation(searchRideService.findById(userId).orElse(null).getLocation());
-        obj.setDestination(searchRideService.findById(userId).orElse(null).getDestination());
+        ArrayList<RideSearch> searchId=searchRideService.findUserID(userId);
         Iterable<RideSearch> entities =searchRideService.findAll();
         ArrayList<ResultMatchObj> result = obj.getMatchList(entities);
-       // obj.findTheBestRideByUserId(result, userId);
-
         ArrayList<ResultMatchObj> result1= obj.getMatchObjList(result,searchRideService);
-        return obj.findTheBestRideByUserId(searchRideService,result1,userId);
+        return obj.findTheBestRideByUserId(searchId,result1,userId);
 
 
     }

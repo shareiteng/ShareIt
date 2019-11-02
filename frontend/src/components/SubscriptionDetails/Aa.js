@@ -11,7 +11,7 @@ class Aa extends React.Component {
     fetchUsers() {
       Axios.post("http://localhost:5000/api/form_submit/getbestride",{},{
         params:{
-          userId:5
+          userId:1578
         }
       })
       .then(response =>
@@ -42,7 +42,7 @@ class Aa extends React.Component {
       const { isLoading, users, error } = this.state;
       return (
         <React.Fragment>
-          <h1>All Rides</h1>
+          <h1>Status</h1>
           {error ? <p>{error.message}</p> : null}
           {!isLoading ? (
             users.map(user => {

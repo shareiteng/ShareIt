@@ -31,13 +31,14 @@ public class ResultMatchObj {
     private String mDestination;
     private String mMatchPointLocation;
     private String mMatchPointDestination;
+    private String mVehicleTypeName;
 
     public void setPassengerName(String[] mPassengerName) {
         this.mPassengerName = mPassengerName;
     }
 
-    public void setLocation(String mLocation) {
-        this.mLocation = mLocation;
+    public void setLocation(String location) {
+        mLocation  =location;
     }
 
     public void setDestination(String mDestination) {
@@ -96,6 +97,7 @@ public class ResultMatchObj {
         mId = id;
         mPassngersIdList = new ArrayList();
         mVehicle = TEXI;
+        mLocation="SSS";
     }
 
     public void addNewPassanger(long id) {
@@ -215,18 +217,20 @@ public class ResultMatchObj {
 
     }
 
-    public  ResultMatchObj findTheBestRideByUserId  (SearchRideService searchRideService, ArrayList<ResultMatchObj> rideList, long userId) throws InterruptedException, ApiException, IOException {
-     //   searchRideService.//(userId);
+    public  ArrayList<ResultMatchObj> findTheBestRideByUserId  (ArrayList<RideSearch> searchIdList, ArrayList<ResultMatchObj> rideList, long userId) throws InterruptedException, ApiException, IOException {
+ArrayList<ResultMatchObj> res= new ArrayList<>();
         for (ResultMatchObj ride : rideList) {
-            for (RideSearch rideSearch : searchRideService.findUserID(userId)) {
+            for (RideSearch rideSearch :searchIdList) {
                 if (ride.getPassengerList().contains(rideSearch.getSearchId()) || ride.mId == userId) {
                     ride.setmMatchPointDestination(MapService.convertAddressToLatLng(ride.getAvargeLatDes()));
                     ride.setmMatchPointLocation(MapService.convertAddressToLatLng(ride.getAvargeLatloc()));
-                    return ride;
+                    ride.setLocation(rideSearch.getLocation());
+                    ride.setDestination(rideSearch.getDestination());
+                    res.add(ride) ;
                 }
             }
         }
-            return new ResultMatchObj(-1);
+            return  res;
         }
 
 
