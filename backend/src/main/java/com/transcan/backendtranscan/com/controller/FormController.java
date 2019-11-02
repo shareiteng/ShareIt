@@ -123,12 +123,16 @@ public class FormController {
     @PostMapping("/getbestride")
     public ResultMatchObj getBestRide(@Valid @RequestParam Long userId) {
         ResultMatchObj obj = new ResultMatchObj(userId);
+        obj.setLocation(searchRideService.findById(userId).orElse(null).getLocation());
+        obj.setDestination(searchRideService.findById(userId).orElse(null).getDestination());
         Iterable<RideSearch> entities =searchRideService.findAll();
         ArrayList<ResultMatchObj> result = obj.getMatchList(entities);
        // obj.findTheBestRideByUserId(result, userId);
 
         ArrayList<ResultMatchObj> result1= obj.getMatchObjList(result,searchRideService);
         return obj.findTheBestRideByUserId(searchRideService,result1,userId);
+
+
     }
 
 

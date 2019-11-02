@@ -1,18 +1,17 @@
 package com.transcan.backendtranscan.domain;
 
+import com.google.maps.errors.ApiException;
 import com.transcan.backendtranscan.services.MapService;
 import com.transcan.backendtranscan.services.MatchService;
 import com.transcan.backendtranscan.services.RideSuggestionService;
 import com.transcan.backendtranscan.services.SearchRideService;
 
 
-import javax.xml.crypto.Data;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+
 
 public class ResultMatchObj {
 
@@ -27,8 +26,33 @@ public class ResultMatchObj {
     private int mVehicle;
     private String avargeLatDes;
     private String AvargeLatloc;
+    private String[] mPassengerName;
+    private String mLocation;
+    private String mDestination;
+    private String mMatchPointLocation;
+    private String mMatchPointDestination;
 
-    public ArrayList<Long> getmPassngersIdList() {
+    public void setPassengerName(String[] mPassengerName) {
+        this.mPassengerName = mPassengerName;
+    }
+
+    public void setLocation(String mLocation) {
+        this.mLocation = mLocation;
+    }
+
+    public void setDestination(String mDestination) {
+        this.mDestination = mDestination;
+    }
+
+    public void setmMatchPointLocation(String mMatchPointLocation) {
+        this.mMatchPointLocation = mMatchPointLocation;
+    }
+
+    public void setmMatchPointDestination(String mMatchPointDestination) {
+        this.mMatchPointDestination = mMatchPointDestination;
+    }
+
+    public ArrayList<Long> getPassngersIdList() {
         return mPassngersIdList;
     }
 
@@ -172,6 +196,7 @@ public class ResultMatchObj {
         }
 
             searchRideService.saveAll(tempDB);
+
         return  bestRideList;
     }
 
@@ -190,15 +215,17 @@ public class ResultMatchObj {
 
     }
 
-    public  ResultMatchObj findTheBestRideByUserId  (SearchRideService searchRideService, ArrayList<ResultMatchObj> rideList, long userId) {
+    public  ResultMatchObj findTheBestRideByUserId  (SearchRideService searchRideService, ArrayList<ResultMatchObj> rideList, long userId) throws InterruptedException, ApiException, IOException {
      //   searchRideService.//(userId);
         for (ResultMatchObj ride : rideList) {
             for (RideSearch rideSearch : searchRideService.findUserID(userId)) {
-                if (ride.getPassengerList().contains(rideSearch.getSearchId()) || ride.mId == userId)
+                if (ride.getPassengerList().contains(rideSearch.getSearchId()) || ride.mId == userId) {
+                    ride.setmMatchPointDestination(MapService.convertAddressToLatLng(ride.getAvargeLatDes()));
+                    ride.setmMatchPointLocation(MapService.convertAddressToLatLng(ride.getAvargeLatloc()));
                     return ride;
+                }
             }
         }
-
             return new ResultMatchObj(-1);
         }
 
