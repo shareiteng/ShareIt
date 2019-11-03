@@ -30,15 +30,17 @@ public class Checker {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(fixedRate = 50000)
+    @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
         for (RideSearch row : searchRideService.findAll()) {
 
             LocalDate inputDate = LocalDate.parse(row.getDate());
             LocalTime a=LocalTime.parse(row.getHours());
-            if(inputDate.isEqual(LocalDate.now())&& LocalTime.now().isAfter(a.minusMinutes(15)));
-            matchService.save(new BestMatch(row));
-            searchRideService.delete(row);
+            log.info("The time is now {}", LocalTime.now());
+            if(inputDate.isEqual(LocalDate.now())&& LocalTime.now().isAfter(a.minusMinutes(15))){
+                matchService.save(new BestMatch(row));
+                searchRideService.delete(row);
+            }
 
         }
     }
