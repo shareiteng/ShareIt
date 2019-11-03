@@ -24,6 +24,8 @@ public class RideSuggestion {
     private String vehicleNumber;
     private String vehicleType;
     private int seats;
+    private String locLatLng;
+    private String desLatLng;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn

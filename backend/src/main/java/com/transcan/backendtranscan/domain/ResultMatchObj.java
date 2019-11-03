@@ -26,12 +26,34 @@ public class ResultMatchObj {
     private int mVehicle;
     private String avargeLatDes;
     private String AvargeLatloc;
+    private String mHouer;
+    private String mDate;
     private String[] mPassengerName;
     private String mLocation;
     private String mDestination;
     private String mMatchPointLocation;
     private String mMatchPointDestination;
     private String mVehicleTypeName;
+
+
+
+    public String getHour() {
+        return mHouer;
+    }
+
+    public void setHouer(String houer) {
+        this.mHouer = houer;
+    }
+
+    public String getDate() {
+        return mDate;
+    }
+
+    public void setDate(String mDate) {
+        this.mDate = mDate;
+    }
+
+
 
     public void setPassengerName(String[] mPassengerName) {
         this.mPassengerName = mPassengerName;
@@ -212,6 +234,8 @@ public class ResultMatchObj {
                                 ride.setmMatchPointLocation(MapService.convertAddressToLatLng(ride.getAvargeLatloc()));
                                 ride.setLocation(rideSearch.getLocation());
                                 ride.setDestination(rideSearch.getDestination());
+                                ride.setHouer(rideSearch.getHours());
+                                ride.setDate(rideSearch.getDate());
                                 res.add(ride) ;
                             }
             }
