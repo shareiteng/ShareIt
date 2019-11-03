@@ -1,6 +1,7 @@
 package com.transcan.backendtranscan.config;
 
 
+import com.transcan.backendtranscan.domain.BestMatch;
 import com.transcan.backendtranscan.domain.RideSearch;
 import com.transcan.backendtranscan.services.MatchService;
 import com.transcan.backendtranscan.services.SearchRideService;
@@ -36,7 +37,7 @@ public class Checker {
             LocalDate inputDate = LocalDate.parse(row.getDate());
             LocalTime a=LocalTime.parse(row.getHours());
             if(inputDate.isEqual(LocalDate.now())&& LocalTime.now().isAfter(a.minusMinutes(15)));
-            matchService.save(row);
+            matchService.save(new BestMatch(row));
             searchRideService.delete(row);
 
         }

@@ -25,7 +25,7 @@ public class BestMatch {
     private String hours;
     private String locLatLng;
     private String desLatLng;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @PrimaryKeyJoinColumn
     private UserInfo userInfo;
 
@@ -35,6 +35,12 @@ public class BestMatch {
         this.location=location;
         this.destination = desination;
         this.date = date;
+    }
+    public BestMatch(RideSearch rideSearch){
+        this.location=rideSearch.getLocation();
+        this.destination = rideSearch.getDestination();
+        this.date = rideSearch.getDate();
+        this.userInfo = rideSearch.getUserInfo();
     }
     public void setRideSearch(String location,String desination, String date, String hours){
         this.location=location;

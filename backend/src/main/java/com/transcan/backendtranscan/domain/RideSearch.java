@@ -32,4 +32,6 @@ public class RideSearch{
         this.date = date;
         this.hours=hours;
     }
+
+
 }
