@@ -59,8 +59,9 @@ public class Checker {
                     LocalTime resHour=LocalTime.parse(resultMatchObj.getHour());
                     if(resDate.isEqual(LocalDate.now())&& LocalTime.now().isAfter(resHour.minusMinutes(15))){
                         matchService.save(new BestMatch(row, resultMatchObj.getPassngersIdList(), resultMatchObj.getAvargeLatloc(), resultMatchObj.getAvargeLatDes()));
+                        if(resultMatchObj.getPassengerList().size()>0)
                         for(long id : resultMatchObj.getPassengerList()){
-                            searchRideService.delete(searchRideService.findById(id).get());
+                            searchRideService.delete(searchRideService.getOne(id));
                     }
                         searchRideService.delete(row);
                     };
