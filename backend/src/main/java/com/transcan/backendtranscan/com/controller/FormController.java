@@ -37,7 +37,7 @@ public class FormController {
 
 
     @PostMapping("/searchsubmit")
-    public ResponseEntity<?> searchSubmit(@Valid @RequestBody RideSearch rideSearch,@Valid @RequestParam Long userId) {
+        public ResponseEntity<?> searchSubmit(@Valid @RequestBody RideSearch rideSearch,@Valid @RequestParam Long userId) {
 
         try {
             rideSearch.setHours(rideSearch.getDate().substring(11));
@@ -104,7 +104,7 @@ public class FormController {
                     rideSearch.setLocLatLng(loLatLang);
                     try {
 
-                        rideSearch.setRideSearch(MapService.convertAddressToLatLng(loLatLang), MapService.convertAddressToLatLng(desLatLang), "24.12.19", "14:00");
+                        rideSearch.setRideSearch(MapService.convertAddressToLatLng(loLatLang), MapService.convertAddressToLatLng(desLatLang), "2019-11-03", "14:00");
 
 
                         rideSearch.setUserInfo(new UserInfo("username12" + i + h + j, "sajj@dd.com12" + i + h + j, "123", "jjj", "jjj"));

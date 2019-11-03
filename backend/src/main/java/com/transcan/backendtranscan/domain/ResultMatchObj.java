@@ -202,32 +202,18 @@ public class ResultMatchObj {
         return  bestRideList;
     }
 
-    public void deleteOldRides (SearchRideService searchRideService, MatchService matchService) {
-
-        for (RideSearch row : searchRideService.findAll()) {
-
-            LocalDate inputDate = LocalDate.parse(row.getDate());
-            LocalDateTime a=LocalDateTime.parse(row.getHours());
-            if(inputDate.isEqual(LocalDate.now())&& LocalDateTime.now().isAfter(a.minusMinutes(15)));
-            matchService.save(row);
-            searchRideService.delete(row);
-
-        }
-
-
-    }
 
     public  ArrayList<ResultMatchObj> findTheBestRideByUserId  (ArrayList<RideSearch> searchIdList, ArrayList<ResultMatchObj> rideList, long userId) throws InterruptedException, ApiException, IOException {
-ArrayList<ResultMatchObj> res= new ArrayList<>();
-        for (ResultMatchObj ride : rideList) {
-            for (RideSearch rideSearch :searchIdList) {
-                if (ride.getPassengerList().contains(rideSearch.getSearchId()) || ride.mId == userId) {
-                    ride.setmMatchPointDestination(MapService.convertAddressToLatLng(ride.getAvargeLatDes()));
-                    ride.setmMatchPointLocation(MapService.convertAddressToLatLng(ride.getAvargeLatloc()));
-                    ride.setLocation(rideSearch.getLocation());
-                    ride.setDestination(rideSearch.getDestination());
-                    res.add(ride) ;
-                }
+                    ArrayList<ResultMatchObj> res= new ArrayList<>();
+                    for (ResultMatchObj ride : rideList) {
+                        for (RideSearch rideSearch :searchIdList) {
+                            if (ride.getPassengerList().contains(rideSearch.getSearchId()) || ride.mId == userId) {
+                                ride.setmMatchPointDestination(MapService.convertAddressToLatLng(ride.getAvargeLatDes()));
+                                ride.setmMatchPointLocation(MapService.convertAddressToLatLng(ride.getAvargeLatloc()));
+                                ride.setLocation(rideSearch.getLocation());
+                                ride.setDestination(rideSearch.getDestination());
+                                res.add(ride) ;
+                            }
             }
         }
             return  res;
