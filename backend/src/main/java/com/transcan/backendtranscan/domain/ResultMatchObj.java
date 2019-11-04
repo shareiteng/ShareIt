@@ -28,7 +28,7 @@ public class ResultMatchObj {
     private String AvargeLatloc;
     private String mHouer;
     private String mDate;
-    private String[] mPassengerName;
+    private ArrayList<String> mPassengerName;
     private String mLocation;
     private String mDestination;
     private String mMatchPointLocation;
@@ -55,7 +55,7 @@ public class ResultMatchObj {
 
 
 
-    public void setPassengerName(String[] mPassengerName) {
+    public void setPassengerName(ArrayList<String> mPassengerName) {
         this.mPassengerName = mPassengerName;
     }
 
@@ -133,7 +133,13 @@ public class ResultMatchObj {
     public ArrayList<Long> getPassengerList() {
         return mPassngersIdList;
     }
+    public ArrayList<String> getmPassengerName() {
+        return mPassengerName;
+    }
 
+    public void setmPassengerName(ArrayList<String> mPassengerName) {
+        this.mPassengerName = mPassengerName;
+    }
     public int getVehicleType() {
         if (getPassengerNum() <= 4)
             mVehicle = TEXI;
@@ -157,11 +163,14 @@ public class ResultMatchObj {
         ArrayList<ResultMatchObj> arrayList = new ArrayList<ResultMatchObj>();
         for (RideSearch current : rideSearch) {
             arrayList.add(new ResultMatchObj(current.getSearchId()));
+            arrayList.get(arrayList.size() - 1).mPassengerName = new ArrayList<String>();
             for (RideSearch passanger : rideSearch) {
                 if (current.getSearchId() != passanger.getSearchId()) {
                     if (MapService.getDistanceGeoLocation(current.getDesLatLng(), passanger.getDesLatLng()) <= 500 &&
                             MapService.getDistanceGeoLocation(current.getLocLatLng(), passanger.getLocLatLng()) <= 500) {
                         arrayList.get(arrayList.size() - 1).addNewPassanger(passanger.getSearchId());
+                        String temp = passanger.getUserInfo().getFirstname()+ " " +passanger.getUserInfo().getLastname();
+                        arrayList.get(arrayList.size() - 1).mPassengerName.add(temp);
                     }
                 }
             }
@@ -199,9 +208,10 @@ public class ResultMatchObj {
             int theBestRide = 0;
             int indexBestRide = 0;
             for (int i = 0; i < resList.size()-1; i++) {
-                if (resList.get(i).getPassengerNum() > theBestRide)
+                if (resList.get(i).getPassengerNum() > theBestRide){
                     theBestRide = resList.get(i).getPassengerNum();
-                indexBestRide = i;
+                    indexBestRide = i;
+                }
             }
             bestRideList.add(resList.get(indexBestRide));
 
@@ -242,6 +252,9 @@ public class ResultMatchObj {
         }
             return  res;
         }
+
+
+
 
 
     }

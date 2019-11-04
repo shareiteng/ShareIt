@@ -105,6 +105,7 @@ public class UserInfo extends DateAudit {
     }
 
     public String getFirstname() {
+        if (firstname==null) return "no name";
         return firstname;
     }
 
@@ -113,6 +114,7 @@ public class UserInfo extends DateAudit {
     }
 
     public String getLastname() {
+        if (lastname==null) return "no name";
         return lastname;
     }
 
