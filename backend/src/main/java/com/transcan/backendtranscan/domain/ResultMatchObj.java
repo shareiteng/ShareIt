@@ -22,6 +22,7 @@ public class ResultMatchObj {
     static final int BUS = 4;
 
     private long mId;
+    private String pName;
     private ArrayList<Long> mPassngersIdList;
     private int mVehicle;
     private String avargeLatDes;
@@ -35,7 +36,29 @@ public class ResultMatchObj {
     private String mMatchPointDestination;
     private String mVehicleTypeName;
 
+    public String getmLocation() {
+        return mLocation;
+    }
 
+    public void setmLocation(String mLocation) {
+        this.mLocation = mLocation;
+    }
+
+    public String getmDestination() {
+        return mDestination;
+    }
+
+    public void setmDestination(String mDestination) {
+        this.mDestination = mDestination;
+    }
+
+    public String getpName() {
+        return pName;
+    }
+
+    public void setpName(String pName) {
+        this.pName = pName;
+    }
 
     public String getHour() {
         return mHouer;
@@ -121,6 +144,13 @@ public class ResultMatchObj {
         mVehicle = TEXI;
         mLocation="SSS";
     }
+    public ResultMatchObj(long id,String pName) {
+        this.pName = pName;
+        this.mId = id;
+        this.mPassngersIdList = new ArrayList();
+        this.mVehicle = TEXI;
+        this.mLocation="SSS";
+    }
 
     public void addNewPassanger(long id) {
         mPassngersIdList.add(id);
@@ -162,7 +192,7 @@ public class ResultMatchObj {
 
         ArrayList<ResultMatchObj> arrayList = new ArrayList<ResultMatchObj>();
         for (RideSearch current : rideSearch) {
-            arrayList.add(new ResultMatchObj(current.getSearchId()));
+            arrayList.add(new ResultMatchObj(current.getSearchId(), current.getUserInfo().getFirstname()+ " " +current.getUserInfo().getLastname()));
             arrayList.get(arrayList.size() - 1).mPassengerName = new ArrayList<String>();
             for (RideSearch passanger : rideSearch) {
                 if (current.getSearchId() != passanger.getSearchId()) {
@@ -199,7 +229,7 @@ public class ResultMatchObj {
 
 
 
-    public ArrayList<ResultMatchObj> getMatchObjList(ArrayList<ResultMatchObj > resultMatchObjArrayList, SearchRideService searchRideService){
+    public ArrayList<ResultMatchObj> getMatchObjList(ArrayList<ResultMatchObj > resultMatchObjArrayList, SearchRideService searchRideService) throws InterruptedException, ApiException, IOException {
         ArrayList<ResultMatchObj> bestRideList= new ArrayList<>();
         ArrayList<ResultMatchObj> resList=resultMatchObjArrayList;
         ArrayList<RideSearch> tempDB= new ArrayList<>();
@@ -218,6 +248,8 @@ public class ResultMatchObj {
             ArrayList<Long> temp = resList.get(indexBestRide).getPassengerList();
             resList.get(indexBestRide).setAvargeLatloc(MapService.getMiddlePoint(temp,true,searchRideService));
             resList.get(indexBestRide).setAvargeLatDes(MapService.getMiddlePoint(temp,false,searchRideService));
+            resList.get(indexBestRide).setLocation(MapService.convertAddressToLatLng(resList.get(indexBestRide).getAvargeLatloc()));
+            resList.get(indexBestRide).setDestination(MapService.convertAddressToLatLng(resList.get(indexBestRide).getAvargeLatDes()));
             for (Long id : resList.get(indexBestRide).getPassengerList()) {
                    tempDB.add(searchRideService.findById(id).orElse(null));
                     searchRideService.deleteById(id);

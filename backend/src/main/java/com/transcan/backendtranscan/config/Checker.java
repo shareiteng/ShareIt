@@ -48,8 +48,8 @@ public class Checker {
             if(inputDate.isEqual(LocalDate.now())&& LocalTime.now().isAfter(rowHour.minusMinutes(15))){
             /***/
                 ResultMatchObj obj = new ResultMatchObj(row.getUserInfo().getId());
-                ArrayList<RideSearch> searchId=searchRideService.findUserID(row.getUserInfo().getId());
-                Iterable<RideSearch> entities =searchRideService.findAll();
+                ArrayList<RideSearch> searchId = searchRideService.findUserID(row.getUserInfo().getId());
+                Iterable<RideSearch> entities = searchRideService.findAll();
                 ArrayList<ResultMatchObj> tempResult = obj.getMatchList(entities);
                 ArrayList<ResultMatchObj> result= obj.getMatchObjList(tempResult,searchRideService);
                 result=obj.findTheBestRideByUserId(searchId,result,row.getUserInfo().getId());

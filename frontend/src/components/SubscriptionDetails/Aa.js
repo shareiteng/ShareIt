@@ -1,7 +1,9 @@
 
 import React, {Component} from 'react'
 import Axios from 'axios';
+let username = localStorage.userid1
 class Aa extends React.Component {
+  
     state = {
       isLoading: true,
       users: [],
@@ -11,19 +13,19 @@ class Aa extends React.Component {
     fetchUsers() {
       Axios.post("http://localhost:5000/api/form_submit/getbestride",{},{
         params:{
-          userId:1578
+          userId:`${username}`
         }
       })
       .then(response =>
         response.data.map(user => ({
-            mId:`${user.mId}`,
-            mPassngersIdList:`${user.mPassngersIdList}`,
+            pName:`${user.pName}`,
+            mPassengerName:`${user.mPassengerName}`,
             mVehicle:`${user.mVehicle}`,
-            avargeLatDes:`${user.avargeLatDes}`,
+            mLocation:`${user.mLocation}`,
             vehicleType:`${user.vehicleType}`,
             passengerList:`${user.passengerList}`,
             passengerNum:`${user.passengerNum}`,
-            avargeLatloc:`${user.avargeLatloc}`
+            mDestination:`${user.mDestination}`
         }))
       )
       .then(users => {
@@ -46,14 +48,13 @@ class Aa extends React.Component {
           {error ? <p>{error.message}</p> : null}
           {!isLoading ? (
             users.map(user => {
-              const { mId, mPassngersIdList, mVehicle,avargeLatDes,vehicleType,passengerList,passengerNum,avargeLatloc } = user;
+              const { pName, mPassengerName,mLocation,passengerNum,mDestination } = user;
               return (
-                <div key={mId}>
-                  <p>Name: {mId}</p>
-                  <p>passengerList: {mPassngersIdList}</p>
-                  <p>mVehicle:{mVehicle}</p>
-                  <p>avargeLatDes: {avargeLatDes}</p>
-                  <p>avargeLatloc{avargeLatloc}</p>
+                <div key={pName}>
+                  <p>Name: {pName}</p>
+                  <p>passengerList: {mPassengerName}</p>
+                  <p>meeting Location: {mLocation}</p>
+                  <p>Destination: {mDestination}</p>
                   <p>number of passenger: {passengerNum}</p>
                   <hr />
                 </div>
