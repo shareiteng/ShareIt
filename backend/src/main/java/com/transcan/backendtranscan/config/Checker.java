@@ -42,7 +42,6 @@ public class Checker {
 
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() throws InterruptedException, ApiException, IOException {
-x
          cosomo();
 
     }
