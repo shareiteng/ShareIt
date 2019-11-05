@@ -25,6 +25,7 @@ public class BestMatch {
     private ArrayList<Long> passengersId;
     private String locLatLngMatch;
     private String desLatLngMatch;
+    private long userId;
     @ManyToOne(cascade = CascadeType.MERGE)
     @PrimaryKeyJoinColumn
     private UserInfo userInfo;
@@ -37,18 +38,18 @@ public class BestMatch {
         this.date = date;
         this.hours=hours;
     }
-    public BestMatch(RideSearch rideSearch, ArrayList<Long> passengersId, String locLatLngMatch, String desLatLngMatch){
+    public BestMatch(RideSearch rideSearch,  String locLatLngMatch, String desLatLngMatch,long userid,long rideid){
         this.location=rideSearch.getLocation();
         this.destination = rideSearch.getDestination();
         this.date = rideSearch.getDate();
         this.hours=rideSearch.getHours();
         this.userInfo = rideSearch.getUserInfo();
-        this.passengersId=passengersId;
         this.locLatLngMatch=locLatLngMatch;
         this.desLatLngMatch=desLatLngMatch;
+        this.userId=userid;
     }
 
-    public BestMatch(RideSuggestion rideSuggestion, ArrayList<Long> passengersId, String locLatLngMatch, String desLatLngMatch){
+    public BestMatch(RideSuggestion rideSuggestion, ArrayList<Long> passengersId, String locLatLngMatch, String desLatLngMatch,long userid){
         this.location=rideSuggestion.getLocation();
         this.destination = rideSuggestion.getDestination();
         this.date = rideSuggestion.getDate();

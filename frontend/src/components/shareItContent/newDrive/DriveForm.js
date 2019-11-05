@@ -79,20 +79,7 @@ class DriveForm extends Component{
             </div>
             
 
-            <h6> I'll do this ride every: </h6>
-              <ToggleButtonGroup
-                  type="checkbox"
-                  value={this.state.value}
-                  id='value'
-                  onChange={this.handleChangeTog}>
-                  <ToggleButton value={1}>Su</ToggleButton>
-                  <ToggleButton value={2}>Mo</ToggleButton>
-                  <ToggleButton value={3}>Tu</ToggleButton>
-                  <ToggleButton value={4}>We</ToggleButton>
-                  <ToggleButton value={5}>Th</ToggleButton>
-                  <ToggleButton value={6}>Fr</ToggleButton>
-                  <ToggleButton value={7}>Sa</ToggleButton>
-              </ToggleButtonGroup>
+            
 
                 <div className="input-field">
                   <label htmlFor="remarks">Remarks</label>

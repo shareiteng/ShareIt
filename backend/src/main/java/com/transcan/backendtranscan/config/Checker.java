@@ -2,6 +2,7 @@ package com.transcan.backendtranscan.config;
 
 
 import com.google.maps.errors.ApiException;
+import com.transcan.backendtranscan.com.controller.FormController;
 import com.transcan.backendtranscan.domain.BestMatch;
 import com.transcan.backendtranscan.domain.ResultMatchObj;
 import com.transcan.backendtranscan.domain.RideSearch;
@@ -15,13 +16,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.validation.Valid;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -42,15 +39,30 @@ public class Checker {
 
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() throws InterruptedException, ApiException, IOException {
-x
-         cosomo();
+        long i = 0;
+        for (RideSearch row : searchRideService.findAll()) {
+
+            LocalDate inputDate = LocalDate.parse(row.getDate());
+            LocalTime rowHour = LocalTime.parse(row.getHours());
+            if (inputDate.isEqual(LocalDate.now()) && LocalTime.now().isAfter(rowHour.minusMinutes(15))) {
+                searchRideService.delete(row);
+                matchService.save(new BestMatch(row, row.getLocLatLng(), row.getDesLatLng(), row.getUserInfo().getId(), i));
+
+            }
+
+
+        }
+        i++;
+
+
 
     }
 
-    private void carpoolRide(){
-ArrayList<Long> passengersId= new ArrayList<>();
 
-        for(RideSuggestion row: rideSuggestionService.findAll()) {
+    private void carpoolRide() {
+        ArrayList<Long> passengersId = new ArrayList<>();
+
+        for (RideSuggestion row : rideSuggestionService.findAll()) {
             LocalDate inputDate = LocalDate.parse(row.getDate());
             LocalTime rowHour = LocalTime.parse(row.getHours());
             log.info("The time is now {}", LocalTime.now());
@@ -62,47 +74,57 @@ ArrayList<Long> passengersId= new ArrayList<>();
                         passengersId.add(searchLine.getSearchId());
                     }
                 }
-                matchService.save(new BestMatch(row, passengersId, MapService.getMiddlePoint(passengersId, true, searchRideService), MapService.getMiddlePoint(passengersId, false, searchRideService)));
+//                BestMatch bestMatch=new BestMatch(row, passengersId, MapService.getMiddlePoint(passengersId, true, searchRideService), MapService.getMiddlePoint(passengersId, false, searchRideService)));
                 for (long id : passengersId) {
                     searchRideService.delete(searchRideService.findById(id).get());
                 }
                 rideSuggestionService.delete(row);
 
+              //  ResultMatchObj res = obj.findTheBestRideByUserId(searchId, result1, userId).get(0);
+               // for (long id : res.getPassengerID())
+                //    searchRideService.delete(searchRideService.findUserID(id).get(0));
+
 
             }
 
 
+        }
+
+
+    }
+
+    public void cosomo() throws InterruptedException, ApiException, IOException {
+        long userId = 0;
+
+        for (RideSearch row : searchRideService.findAll()) {
+            if (userId == 0) {
+                LocalDate inputDate = LocalDate.parse(row.getDate());
+                LocalTime rowHour = LocalTime.parse(row.getHours());
+                log.info("The time is now {}", LocalTime.now());
+                if (inputDate.isEqual(LocalDate.now()) && LocalTime.now().isAfter(rowHour.minusMinutes(15))) {
+                    userId = row.getUserInfo().getId();
+
                 }
+            }
+        }
+        if (userId != 0) {
+            ResultMatchObj obj = new ResultMatchObj(userId);
+            ArrayList<RideSearch> searchId = searchRideService.findUserID(userId);
+            Iterable<RideSearch> entities = searchRideService.findAll();
+            ArrayList<ResultMatchObj> result = obj.getMatchList(entities);
+            ArrayList<ResultMatchObj> result1 = obj.getMatchObjList(result, searchRideService);
+
+            ResultMatchObj res = obj.findTheBestRideByUserId(searchId, result1, userId).get(0);
+            for (long id : res.getPassengerID())
+                searchRideService.delete(searchRideService.findUserID(id).get(0));
 
 
         }
-        public void cosomo() throws InterruptedException, ApiException, IOException {
-            long userId = 0;
-            for ( int i=0; i< searchRideService.findAll().size();i++) {
-               for (RideSearch row : searchRideService.findAll()) {
-                   if (userId == 0) {
-                       LocalDate inputDate = LocalDate.parse(row.getDate());
-                       LocalTime rowHour = LocalTime.parse(row.getHours());
-                       log.info("The time is now {}", LocalTime.now());
-                       if (inputDate.isEqual(LocalDate.now()) && LocalTime.now().isAfter(rowHour.minusMinutes(15))) {
-                           userId = row.getUserInfo().getId();
+        for (RideSearch row : searchRideService.findAll()) {
+            if (row.getSearchId() == 3)
+                searchRideService.delete(row);
 
-                       }}
-                   }} if (userId != 0) {
-                   ResultMatchObj obj = new ResultMatchObj(userId);
-                   ArrayList<RideSearch> searchId = searchRideService.findUserID(userId);
-                   Iterable<RideSearch> entities = searchRideService.findAll();
-                   ArrayList<ResultMatchObj> result = obj.getMatchList(entities);
-                   ArrayList<ResultMatchObj> result1 = obj.getMatchObjList(result, searchRideService);
-                   matchService.save(new BestMatch("1", "2", "3", "4"));
-                   ResultMatchObj res = obj.findTheBestRideByUserId(searchId, result1, userId).get(0);
-                   for (long id : res.getPassengerID())
-                   searchRideService.delete(searchRideService.findUserID(id).get(0));
-
-                for (RideSearch row : searchRideService.findAll()) {
-                    if(row.getUserInfo().getId()==userId)
-                        searchRideService.delete(row);
-               }
-                userId=0;
-           }
-        }}
+        }
+        userId = 0;
+    }
+}

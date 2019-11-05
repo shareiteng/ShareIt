@@ -125,8 +125,14 @@ public class FormController {
 
     @PostMapping("/getbestride")
     public ArrayList<ResultMatchObj> getBestRide(@Valid @RequestParam Long userId) throws InterruptedException, ApiException, IOException {
-        ResultMatchObj obj = new ResultMatchObj(userId);
+        ArrayList<ResultMatchObj> temp = new ArrayList<ResultMatchObj>();
         ArrayList<RideSearch> searchId=searchRideService.findUserID(userId);
+        if(searchId.size()<1) {
+            ResultMatchObj obj = new ResultMatchObj(userId,"there is no ride!");
+            temp.add(obj);
+            return temp;
+        }
+        ResultMatchObj obj = new ResultMatchObj(userId);
         Iterable<RideSearch> entities =searchRideService.findAll();
         ArrayList<ResultMatchObj> result = obj.getMatchList(entities);
         ArrayList<ResultMatchObj> result1= obj.getMatchObjList(result,searchRideService);
