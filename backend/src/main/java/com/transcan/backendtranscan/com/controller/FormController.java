@@ -12,17 +12,16 @@ import com.transcan.backendtranscan.services.SearchRideService;
 import com.transcan.backendtranscan.services.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.TimerTask;
+
+
 
 @CrossOrigin
 @RestController
@@ -34,6 +33,8 @@ public class FormController {
     private UserInfoService userInfoService;
     @Autowired
     private RideSuggestionService rideSuggestionService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
     @PostMapping("/searchsubmit")
@@ -107,7 +108,7 @@ public class FormController {
                         rideSearch.setRideSearch(MapService.convertAddressToLatLng(loLatLang), MapService.convertAddressToLatLng(desLatLang), "2019-11-03", "14:00");
 
 
-                        rideSearch.setUserInfo(new UserInfo("username12" + i + h + j, "sajj@dd.com12" + i + h + j, "123", "jjj", "jjj"));
+                        rideSearch.setUserInfo(new UserInfo("username12" + i + h + j, "sajj@dd.com12" + i + h + j, passwordEncoder.encode("123"), "jjj", "jjj"));
 
                         searchRideService.save(rideSearch);
                     } catch (Exception e) {
