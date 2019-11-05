@@ -28,6 +28,7 @@ public class Checker {
 
     @Autowired
     private SearchRideService searchRideService;
+    @Autowired
     private RideSuggestionService rideSuggestionService;
 
     @Autowired
@@ -40,6 +41,7 @@ public class Checker {
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() throws InterruptedException, ApiException, IOException {
         log.info("The time is now {}", LocalTime.now());
+        carpoolRide();
         long i = 0;
         for (RideSearch row : searchRideService.findAll()) {
 
@@ -78,14 +80,10 @@ public class Checker {
                 }
 //                BestMatch bestMatch=new BestMatch(row, passengersId, MapService.getMiddlePoint(passengersId, true, searchRideService), MapService.getMiddlePoint(passengersId, false, searchRideService)));
                 for (long id : passengersId) {
-                    searchRideService.delete(searchRideService.findById(id).get());
+                    searchRideService.delete(searchRideService.findById(id).orElse(null));
                 }
                 rideSuggestionService.delete(row);
 
-              //  ResultMatchObj res = obj.findTheBestRideByUserId(searchId, result1, userId).get(0);
-               // for (long id : res.getPassengerID())
-                //    searchRideService.delete(searchRideService.findUserID(id).get(0));
-
 
             }
 
@@ -93,40 +91,6 @@ public class Checker {
         }
 
 
-    }
-
-    public void cosomo() throws InterruptedException, ApiException, IOException {
-        long userId = 0;
-
-        for (RideSearch row : searchRideService.findAll()) {
-            if (userId == 0) {
-                LocalDate inputDate = LocalDate.parse(row.getDate());
-                LocalTime rowHour = LocalTime.parse(row.getHours());
-                log.info("The time is now {}", LocalTime.now());
-                if (inputDate.isEqual(LocalDate.now()) && LocalTime.now().isAfter(rowHour.minusMinutes(15))) {
-                    userId = row.getUserInfo().getId();
-
-                }
-            }
-        }
-        if (userId != 0) {
-            ResultMatchObj obj = new ResultMatchObj(userId);
-            ArrayList<RideSearch> searchId = searchRideService.findUserID(userId);
-            Iterable<RideSearch> entities = searchRideService.findAll();
-            ArrayList<ResultMatchObj> result = obj.getMatchList(entities);
-            ArrayList<ResultMatchObj> result1 = obj.getMatchObjList(result, searchRideService);
-
-            ResultMatchObj res = obj.findTheBestRideByUserId(searchId, result1, userId).get(0);
-            for (long id : res.getPassengerID())
-                searchRideService.delete(searchRideService.findUserID(id).get(0));
+    }}
 
 
-        }
-        for (RideSearch row : searchRideService.findAll()) {
-            if (row.getSearchId() == 3)
-                searchRideService.delete(row);
-
-        }
-        userId = 0;
-    }
-}
