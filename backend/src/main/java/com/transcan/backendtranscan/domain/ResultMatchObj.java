@@ -29,6 +29,16 @@ public class ResultMatchObj {
     private String mHouer;
     private String mDate;
     private ArrayList<String> mPassengerName;
+
+    public ArrayList<Long> getPassengerID() {
+        return mPassengerID;
+    }
+
+    public void setPassengerID(ArrayList<Long> mPassengerID) {
+        this.mPassengerID = mPassengerID;
+    }
+
+    private ArrayList<Long> mPassengerID;
     private String mLocation;
     private String mDestination;
     private String mMatchPointLocation;
@@ -164,6 +174,7 @@ public class ResultMatchObj {
         for (RideSearch current : rideSearch) {
             arrayList.add(new ResultMatchObj(current.getSearchId()));
             arrayList.get(arrayList.size() - 1).mPassengerName = new ArrayList<String>();
+            arrayList.get(arrayList.size() - 1).mPassengerID = new ArrayList<Long>();
             for (RideSearch passanger : rideSearch) {
                 if (current.getSearchId() != passanger.getSearchId()) {
                     if (MapService.getDistanceGeoLocation(current.getDesLatLng(), passanger.getDesLatLng()) <= 500 &&
@@ -171,6 +182,7 @@ public class ResultMatchObj {
                         arrayList.get(arrayList.size() - 1).addNewPassanger(passanger.getSearchId());
                         String temp = passanger.getUserInfo().getFirstname()+ " " +passanger.getUserInfo().getLastname();
                         arrayList.get(arrayList.size() - 1).mPassengerName.add(temp);
+                        arrayList.get(arrayList.size() - 1).mPassengerID.add(passanger.getUserInfo().getId());
                     }
                 }
             }
