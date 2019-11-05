@@ -124,7 +124,7 @@ public class FormController {
         ArrayList<ResultMatchObj> temp = new ArrayList<ResultMatchObj>();
         ArrayList<RideSearch> searchId=searchRideService.findUserID(userId);
         ArrayList<BestMatch> bestM = matchService.findUserID(userId);
-        if(bestM.size()>0;  ){
+        if(bestM.size()>0 ){
             temp.add(new ResultMatchObj(userId,"the ride was executed!"));
             return temp;
         }
