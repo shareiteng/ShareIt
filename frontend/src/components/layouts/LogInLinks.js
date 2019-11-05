@@ -17,7 +17,7 @@ const LogInLinks =(props)=>{
                     <Nav>
                     
                     <NavDropdown  title="" id="collasible-nav-dropdown" alignRight >
-                        <NavDropdown.Item href="#">Account</NavDropdown.Item>
+                        <NavDropdown.Item href="/search">Search</NavDropdown.Item>
                         <NavDropdown.Item href="profile">My Profile</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#" onClick={props.signOut}>LogOut</NavDropdown.Item>

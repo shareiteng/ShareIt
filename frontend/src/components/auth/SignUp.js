@@ -62,7 +62,7 @@ class SignUp extends Component{
                             <Media.Body>
                                 <h5>Who we are? </h5>
                                 <p>
-                                Transacane is a smart transformation application for help you to share 
+                                Transcan is a smart transformation application for help you to share 
                                 your ride in the best way with other people. Togther we will match the best 
                                 vehicle for take you and more people in your location to common  desteny 
                                 point in the chipest and faster way.
