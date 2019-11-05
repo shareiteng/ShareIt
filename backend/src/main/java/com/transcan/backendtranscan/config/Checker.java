@@ -39,11 +39,13 @@ public class Checker {
 
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() throws InterruptedException, ApiException, IOException {
+        log.info("The time is now {}", LocalTime.now());
         long i = 0;
         for (RideSearch row : searchRideService.findAll()) {
 
             LocalDate inputDate = LocalDate.parse(row.getDate());
             LocalTime rowHour = LocalTime.parse(row.getHours());
+
             if (inputDate.isEqual(LocalDate.now()) && LocalTime.now().isAfter(rowHour.minusMinutes(15))) {
                 searchRideService.delete(row);
                 matchService.save(new BestMatch(row, row.getLocLatLng(), row.getDesLatLng(), row.getUserInfo().getId(), i));

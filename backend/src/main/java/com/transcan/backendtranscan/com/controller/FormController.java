@@ -1,15 +1,9 @@
 package com.transcan.backendtranscan.com.controller;
 
 import com.google.maps.errors.ApiException;
-import com.transcan.backendtranscan.domain.ResultMatchObj;
-import com.transcan.backendtranscan.domain.RideSearch;
-import com.transcan.backendtranscan.domain.RideSuggestion;
-import com.transcan.backendtranscan.domain.UserInfo;
+import com.transcan.backendtranscan.domain.*;
 import com.transcan.backendtranscan.payload.ApiResponse;
-import com.transcan.backendtranscan.services.MapService;
-import com.transcan.backendtranscan.services.RideSuggestionService;
-import com.transcan.backendtranscan.services.SearchRideService;
-import com.transcan.backendtranscan.services.UserInfoService;
+import com.transcan.backendtranscan.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +25,8 @@ public class FormController {
     private SearchRideService searchRideService;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private MatchService matchService;
     @Autowired
     private RideSuggestionService rideSuggestionService;
     @Autowired
@@ -127,9 +123,13 @@ public class FormController {
     public ArrayList<ResultMatchObj> getBestRide(@Valid @RequestParam Long userId) throws InterruptedException, ApiException, IOException {
         ArrayList<ResultMatchObj> temp = new ArrayList<ResultMatchObj>();
         ArrayList<RideSearch> searchId=searchRideService.findUserID(userId);
+        ArrayList<BestMatch> bestM = matchService.findUserID(userId);
+        if(bestM.size()>0;  ){
+            temp.add(new ResultMatchObj(userId,"the ride was executed!"));
+            return temp;
+        }
         if(searchId.size()<1) {
-            ResultMatchObj obj = new ResultMatchObj(userId,"there is no ride!");
-            temp.add(obj);
+            temp.add(new ResultMatchObj(userId,"there is no ride!"));
             return temp;
         }
         ResultMatchObj obj = new ResultMatchObj(userId);

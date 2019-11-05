@@ -49,7 +49,17 @@ class Aa extends React.Component {
           {!isLoading ? (
             users.map(user => {
               const { pName, mPassengerName,mLocation,passengerNum,mDestination } = user;
+              if(pName==="the ride was executed!"){
               return (
+                <div key={pName}>
+                  <h5>congatulations!!<br/><br/>
+                     {pName}</h5>
+                  
+                  <hr />
+                </div>
+              );}
+              else return(
+                 (
                 <div key={pName}>
                   <p>Name: {pName}</p>
                   <p>passengerList: {mPassengerName}</p>
@@ -58,8 +68,8 @@ class Aa extends React.Component {
                   <p>number of passenger: {passengerNum}</p>
                   <hr />
                 </div>
-              );
-            })
+              )
+            )})
           ) : (
             <h3>Loading...</h3>
           )}
